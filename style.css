@@ -1,0 +1,162 @@
+* {
+	box-sizing: border-box;
+}
+
+body {
+	font-family: Open Sans;
+	font-weight: 300;
+	display: grid;
+	grid-template-columns: 1fr 5fr;
+	grid-template-rows: 2fr 4fr;
+	grid-template-areas:
+	"sidebar main"
+	"sidebar output";
+	height: 120vh;
+}
+
+header {
+	display: flex;
+	flex-direction: column;
+	background-color: #1F1F3D;
+	grid-area: sidebar;
+	height: 120vh;
+}
+
+h1 {
+	color: #FFFFFF;
+	font-size: 16px;
+	padding: 10px 0px 10px 13px;
+}
+
+h2 {
+	font-size: 14px;
+	color: #BFBFDD;
+	padding-bottom: 10px;
+}
+
+button {
+	border-radius: 1.5px;
+}
+
+ul {
+	position: relative;
+	right: 40px;
+/*	display: flex-column;
+	justify-content: start;*/
+
+}
+
+li {
+	margin: 15px 0px 15px 0px;
+	list-style: none;
+	color: #FFFFFF
+}
+
+input {
+	border-radius: 1px;
+	border-width: .5px;
+	border-color: #353567;
+}
+
+main {
+	background-color: #A9AAD2;
+	grid-area: main;
+}
+
+output {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	grid-template-rows: 1fr 1fr;
+	grid-gap: 10px;
+	background-color: #EAEAF4;
+	grid-area: output;
+}
+
+legend {
+	display: none;
+}
+
+fieldset {
+	border: 0;
+}
+
+.header-section {
+	border-top: 1px solid #353567;
+	border-bottom: 1px solid #353567;
+	padding: 0px 13px 10px 13px;
+	margin-bottom: 10px;
+}
+
+.header-form {
+}
+
+.new-quality-label {
+	color: #BFBFDD;
+}
+
+.header-button {
+	color: #E9E9F3;
+	background-color: #5356A4;
+	border-color: #353567;
+	margin-bottom: 15px;
+	height: 2.5em;
+	width: 100%;
+}
+
+.quality-input {
+	height: 2.5em;
+	width: 100%;
+	margin-top: 10px;
+	margin-bottom: 15px;
+}
+
+.header-form {
+	border-bottom: 1px solid #353567;
+}
+
+.main-form {
+	display: grid;
+	grid-template-columns: 1fr 2fr 1fr;
+	grid-template-areas:
+	"left center right";
+}
+
+.main-fieldset {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	grid-area: center;
+	margin: 10px auto 0 auto;
+	width: 100%;
+}
+
+.main-label {
+	font-weight: bold;
+}
+
+.title-input {
+	margin: 10px 0px 20px 0px;
+	width: 90%;
+	height: 2.5em;
+}
+
+.body-input {
+	margin: 10px 0px 20px 0px;
+	width: 90%;
+	height: 6em;
+}
+
+.save-button {
+	color: #FFFFFF;
+	margin: 10px 0px 20px 0px;
+	border: 0;
+	background-color: #5356A4;
+	width: 90%;
+	height: 3em;
+}
+
+.search-ideas-input {
+	margin: 10px 0px 5px 0px;
+	width: 90%;
+	height: 2.5em;
+}
