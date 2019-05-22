@@ -8,6 +8,7 @@ var saveBtn = document.getElementById('save-button');
 var searchInput = document.getElementById('search-ideas-input');
 var outputField = document.getElementById('output-field');
 
+window.addEventListener('load', refillArray);
 saveBtn.addEventListener('click', handleSubmit);
 titleInput.addEventListener('keyup', enableSaveBtn);
 bodyInput.addEventListener('keyup', enableSaveBtn);
@@ -17,12 +18,22 @@ function handleSubmit() {
 	createIdea();
 };
 
+// on page load pull down local storage array, make instances through the class/constructor and a map function, and then reassign global array to newly created array 
+
+function refillArray() {
+	if (JSON.parse(localStorage.getItem('ideas array')) === null){
+		return;
+	} else {
+	var newArray = JSON.parse(localStorage.getItem('ideas array')).map(function(array) {
+		return new Idea(array.title, array.body, array.data, array.star, array.quality);
+	});
+	ideaArray = newArray;}
+};
+
 function createIdea() {
 	var idea = new Idea(titleInput.value, bodyInput.value);
-	console.log(titleInput.value);
 	ideaArray.push(idea);
-	console.log(ideaArray);
-	idea.storeIdea(ideaArray);
+	localStorage.setItem('ideas array', JSON.stringify(ideaArray));
 	titleInput.value = "";
 	bodyInput.value = "";
 	displayIdeaCard(idea);
