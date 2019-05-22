@@ -7,8 +7,8 @@ class Idea {
 		this.quality = 0;
 	}
 
-	storeIdea(ideaArray){
-		localStorage.setItem('ideas',JSON.stringify(ideaArray));
+	storeIdea(idea){
+		localStorage.setItem(this.data,JSON.stringify(idea));
 	}
 
 	removeIdea(){
