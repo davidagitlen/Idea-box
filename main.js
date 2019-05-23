@@ -13,6 +13,11 @@ window.addEventListener('load', repopulateIdeaCards);
 saveBtn.addEventListener('click', handleSubmit);
 titleInput.addEventListener('keyup', enableSaveBtn);
 bodyInput.addEventListener('keyup', enableSaveBtn);
+outputField.addEventListener('click', function(e) {
+ if (e.target.classList.contains('delete-button')) {
+   deleteCard(e);
+ };
+});
 
 function handleSubmit() {
 	createIdea();
@@ -29,7 +34,7 @@ function refillArray() {
 };
 
 function createIdea() {
-	var idea = new Idea(titleInput.value, bodyInput.value);
+	var idea = new Idea(titleInput.value, bodyInput.value, Date.now());
 	ideaArray.push(idea);
 	idea.storeIdea(ideaArray);
 	titleInput.value = "";
@@ -73,16 +78,9 @@ function disableSaveBtn() {
 	saveBtn.disabled = true;
 };
 
-outputField.addEventListener('click', function(e) {
- if (e.target.classList.contains('delete-button')) {
-   deleteCard(e);
- };
-});
-
 function deleteCard(e) {
- e.target.closest('.idea-box').remove();
- // var deleteIdea = ideaArray.find(function(deleteIdea) {
- // 	return deleteIdea.data === this.data
- // })
- deleteIdea.removeIdea(ideaArray);
+e.target.closest('.idea-box').remove();
+var ideaId = e.target.closest('.idea-box').getAttribute('data-id');
+var idea = new Idea;
+idea.removeIdea(ideaId);
 };
