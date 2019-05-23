@@ -47,9 +47,10 @@ function createIdea() {
 	disableSaveBtn();
 };
 
-function displayIdeaCard({title, body, data}) {
+function displayIdeaCard({title, body, data, star, quality}) {
+	var starSrc = star ? 'star-active.svg' : 'star.svg';
 	outputField.insertAdjacentHTML('afterbegin', 	`<section class="idea-box" data-id=${data}>
-			<header class="idea-header"><input type="image" class="star-button" src="idea-box-icons/star.svg" height="30px" width="30px"><input type="image" src="idea-box-icons/delete.svg" class="delete-button" height="30px" width="30px"></header>
+			<header class="idea-header"><input type="image" class="star-button" src="idea-box-icons/${starSrc}" height="30px" width="30px"><input type="image" src="idea-box-icons/delete.svg" class="delete-button" height="30px" width="30px"></header>
 			<article class="idea-article">
 				<p contenteditable="true">${title}<p>
 				<p contenteditable="true">${body}</p>
@@ -93,4 +94,6 @@ function toggleStar(star) {
 	} else {
 		star.setAttribute('src', 'idea-box-icons/star.svg');
 	}
+
+	targetIdea.storeIdea(ideaArray);
 }
