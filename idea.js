@@ -22,9 +22,8 @@ class Idea {
 		this.storeIdea(ideaArray);
 	};
 
-	updateIdea(){
-
-	}
+	updateIdea(){ 
+ }	
 
 	updateQuality(){
 		this.quality++
