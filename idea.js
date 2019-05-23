@@ -7,12 +7,16 @@ class Idea {
 		this.quality = 0;
 	}
 
-	storeIdea(idea){
-		localStorage.setItem(this.data,JSON.stringify(idea));
+	storeIdea(ideaArray){
+		localStorage.setItem('ideaArray',JSON.stringify(ideaArray));
 	}
 
-	removeIdea(){
-		localStorage.removeItem();
+	removeIdea(array){
+		console.log('hey');
+		var ideaArray = array.filter(function(idea) {
+			return idea.data !== this.data
+		});
+		this.storeIdea(ideaArray);
 	}
 
 	updateIdea(){

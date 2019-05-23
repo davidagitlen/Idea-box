@@ -13,18 +13,15 @@ saveBtn.addEventListener('click', handleSubmit);
 titleInput.addEventListener('keyup', enableSaveBtn);
 bodyInput.addEventListener('keyup', enableSaveBtn);
 
-
 function handleSubmit() {
 	createIdea();
 };
 
-// on page load pull down local storage array, make instances through the class/constructor and a map function, and then reassign global array to newly created array 
-
 function refillArray() {
-	if (JSON.parse(localStorage.getItem('ideas array')) === null){
+	if (JSON.parse(localStorage.getItem('ideaArray')) === null){
 		return;
 	} else {
-	var newArray = JSON.parse(localStorage.getItem('ideas array')).map(function(array) {
+	var newArray = JSON.parse(localStorage.getItem('ideaArray')).map(function(array) {
 		return new Idea(array.title, array.body, array.data, array.star, array.quality);
 	});
 	ideaArray = newArray;}
@@ -33,16 +30,15 @@ function refillArray() {
 function createIdea() {
 	var idea = new Idea(titleInput.value, bodyInput.value);
 	ideaArray.push(idea);
-	localStorage.setItem('ideas array', JSON.stringify(ideaArray));
+	idea.storeIdea(ideaArray);
 	titleInput.value = "";
 	bodyInput.value = "";
 	displayIdeaCard(idea);
 	disableSaveBtn();
 };
 
-function displayIdeaCard({title, body}) {
-	console.log('hello!')
-	outputField.insertAdjacentHTML('afterbegin', 	`<section class="idea-box">
+function displayIdeaCard({title, body, data}) {
+	outputField.insertAdjacentHTML('afterbegin', 	`<section class="idea-box" data-id=${data}>
 			<header class="idea-header"><input type="image" src="idea-box-icons/star.svg" height="30px" width="30px"><input type="image" src="idea-box-icons/delete.svg" class="delete-button" height="30px" width="30px"></header>
 			<article class="idea-article">
 				<p>${title}<p>
@@ -71,4 +67,9 @@ outputField.addEventListener('click', function(e) {
 
 function deleteCard(e) {
  e.target.closest('.idea-box').remove();
+ var deleteIdea = ideaArray.find(function(deleteIdea) {
+ 	return deleteIdea.data === this.data
+ })
+ deleteIdea.removeIdea(ideaArray);
+ // console.log('idea', idea);
 };
