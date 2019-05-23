@@ -213,3 +213,11 @@ fieldset {
 	font-weight: 600;
 	color: #FFFFFF;
 }
+
+.no-idea-yet-text {
+	position: absolute;
+	text-align: center;
+	font-size: 72px;
+	font-family: 'Indie Flower', cursive;
+	display: none;
+}

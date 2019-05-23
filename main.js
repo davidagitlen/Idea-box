@@ -14,8 +14,7 @@ window.addEventListener('load', repopulateIdeaCards);
 saveBtn.addEventListener('click', handleSubmit);
 titleInput.addEventListener('keyup', enableSaveBtn);
 bodyInput.addEventListener('keyup', enableSaveBtn);
-// ideaCard.addEventListener('input', editIdeaCard);
-// ideaCard.addEventListener('keydown', handleCardEnter )
+outputField.addEventListener('keydown', handleCardEdit)
 outputField.addEventListener('click', function(e) {
  if (e.target.classList.contains('delete-button')) {
    deleteCard(e);
@@ -68,25 +67,18 @@ function repopulateIdeaCards() {
 	}
 }
 
-function editIdeaCard(e) {
-	// var '' = e.target.closest("idea-card").dataset.index;
- //  	var parsedIdea = JSON.parse(localStorage.getItem(''));
-    if (e.target.className === "idea-article-title") {
-      idea.updateIdea(e.target.innerText, "title");
-    }
-    if (e.target.className === "idea-article-body") {
-      idea.updateIdea(e.target.innerText, "body");
-    }
-}; 
-
-// function handleCardEnter(e) {
-//   if (e.keyCode === 13) {
-//     toBlur.blur();
-//   }
-//   if (e.keyCode === 13) {
-//     toBlur.blur();
-//   }
-// }
+function handleCardEdit(e) {
+	console.log(e.keyCode);
+  if (e.keyCode === 13) {
+  	var title = e.target.closest('.idea-article').querySelector('#idea-title').innerText;
+  	var body = e.target.closest('.idea-article').querySelector('#idea-body').innerText;
+    e.target.blur();
+    var ideaId = e.target.closest('.idea-box').getAttribute('data-id');
+    var ideaToUpdate = findIdea(ideaId);
+    ideaToUpdate.updateIdea(title, body);
+    ideaToUpdate.storeIdea(ideaArray);
+  }
+}
 
 function enableSaveBtn() {
 	console.log('I\'m working');
@@ -108,14 +100,18 @@ function deleteCard(e) {
 
 function toggleStar(star) {
 	var ideaId = star.closest('.idea-box').getAttribute('data-id');
-	var targetIdea = ideaArray.find(function(idea) {
-		return idea.data == ideaId;
-	});
-	targetIdea.star = !targetIdea.star;
+	var targetIdea = findIdea(ideaId);
+	targetIdea.updateStar();
 	if(targetIdea.star) {
 		star.setAttribute('src', 'idea-box-icons/star-active.svg');
 	} else {
 		star.setAttribute('src', 'idea-box-icons/star.svg');
 	}
 	targetIdea.storeIdea(ideaArray);
+}
+
+function findIdea(id) {
+	return ideaArray.find(function(idea) {
+		return idea.data == id;
+	});
 }
