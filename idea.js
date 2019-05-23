@@ -18,12 +18,19 @@ class Idea {
 				return arrayItem
 			}
 		})
+
 		ideaArray = updatedArray;
 		this.storeIdea(ideaArray);
-	};
+	}
 
-	updateIdea(){ 
- }	
+	updateIdea(title, body){ 
+		this.title = title;
+		this.body = body;
+ 	}
+
+ 	updateStar() {
+ 		this.star = !this.star;
+ 	}
 
 	updateQuality(){
 		this.quality++
