@@ -12,7 +12,6 @@ body {
 	"sidebar main"
 	"sidebar output"
 	"sidebar output";
-	height: 120vh;
 }
 
 h1 {
@@ -64,6 +63,7 @@ output {
 	background-color: #EAEAF4;
 	grid-area: output;
 	padding: 20px;
+	height: 100%;
 }
 
 legend {
@@ -79,7 +79,6 @@ fieldset {
 	flex-direction: column;
 	background-color: #1F1F3D;
 	grid-area: sidebar;
-	height: 120vh;
 }
 
 .header-section {
@@ -90,6 +89,7 @@ fieldset {
 }
 
 .header-form {
+	border-bottom: 1px solid #353567;
 }
 
 .new-quality-label {
@@ -110,10 +110,6 @@ fieldset {
 	width: 100%;
 	margin-top: 10px;
 	margin-bottom: 15px;
-}
-
-.header-form {
-	border-bottom: 1px solid #353567;
 }
 
 .main-form {

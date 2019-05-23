@@ -1,8 +1,8 @@
 class Idea {
-	constructor(title, body){
+	constructor(title, body, data){
 		this.title = title;
 		this.body = body;
-		this.data = Date.now();
+		this.data = data;
 		this.star = false;
 		this.quality = 0;
 	}
@@ -11,13 +11,16 @@ class Idea {
 		localStorage.setItem('ideaArray',JSON.stringify(ideaArray));
 	}
 
-	removeIdea(array){
+	removeIdea(ideaId){
 		console.log('hey');
-		var ideaArray = array.filter(function(idea) {
-			return idea.data !== this.data
-		});
+			var updatedArray = ideaArray.filter(function(arrayItem){
+			if(arrayItem.data !== parseInt(ideaId)) {
+				return arrayItem
+			}
+		})
+		ideaArray = updatedArray;
 		this.storeIdea(ideaArray);
-	}
+	};
 
 	updateIdea(){ 
  }	
