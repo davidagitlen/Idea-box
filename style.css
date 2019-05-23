@@ -199,6 +199,12 @@ fieldset {
 	padding: 10px;
 }
 
+.idea-article-title {
+  	color: #1F1F3D;
+  	font-size: 24px;
+  	font-weight: 600;
+} 	
+
 .idea-footer {
 	display: flex;
 	justify-content: space-between;

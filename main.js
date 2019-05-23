@@ -7,12 +7,15 @@ var bodyInput = document.getElementById('body-input');
 var saveBtn = document.getElementById('save-button');
 var searchInput = document.getElementById('search-ideas-input');
 var outputField = document.getElementById('output-field');
+var ideaCard = document.querySelector('.idea-box'); 
 
 window.addEventListener('load', refillArray);
 window.addEventListener('load', repopulateIdeaCards);
 saveBtn.addEventListener('click', handleSubmit);
 titleInput.addEventListener('keyup', enableSaveBtn);
 bodyInput.addEventListener('keyup', enableSaveBtn);
+// ideaCard.addEventListener('input', editIdeaCard);
+// ideaCard.addEventListener('keydown', handleCardEnter )
 
 function handleSubmit() {
 	createIdea();
@@ -39,11 +42,12 @@ function createIdea() {
 };
 
 function displayIdeaCard({title, body, data}) {
-	outputField.insertAdjacentHTML('afterbegin', 	`<section class="idea-box" data-id=${data}>
+	outputField.insertAdjacentHTML('afterbegin', 	
+		`<section class="idea-box" data-id=${data}>
 			<header class="idea-header"><input type="image" src="idea-box-icons/star.svg" height="30px" width="30px"><input type="image" src="idea-box-icons/delete.svg" class="delete-button" height="30px" width="30px"></header>
 			<article class="idea-article">
-				<p>${title}<p>
-				<p>${body}</p>
+				<p class="idea-article-title" id="idea-title" contenteditable = 'true'>${title}<p>
+				<p class="idea-article-body" id="idea-body" contenteditable = 'true'>${body}</p>
 			</article>
 			<footer class="idea-footer"><input type="image" src="idea-box-icons/upvote.svg" height="30px" width="30px"><p class= "idea-footer-text">Quality:&nbsp;&nbsp;<span>Swill</span></p><input type="image" src="idea-box-icons/downvote.svg" height="30px" width="30px"></footer>
 		</section>`)
@@ -51,16 +55,29 @@ function displayIdeaCard({title, body, data}) {
 
 function repopulateIdeaCards() {
 	for (var i = 0; i < ideaArray.length; i++) {
-	outputField.insertAdjacentHTML('afterbegin', 	`<section class="idea-box" data-id=${ideaArray[i].data}>
-			<header class="idea-header"><input type="image" src="idea-box-icons/star.svg" height="30px" width="30px"><input type="image" src="idea-box-icons/delete.svg" class="delete-button" height="30px" width="30px"></header>
-			<article class="idea-article">
-				<p>${ideaArray[i].title}<p>
-				<p>${ideaArray[i].body}</p>
-			</article>
-			<footer class="idea-footer"><input type="image" src="idea-box-icons/upvote.svg" height="30px" width="30px"><p class= "idea-footer-text">Quality:&nbsp;&nbsp;<span>Swill</span></p><input type="image" src="idea-box-icons/downvote.svg" height="30px" width="30px"></footer>
-		</section>`)
+		displayIdeaCard(arrayIdea[i]);
 	}
 };
+
+function editIdeaCard(e) {
+	// var '' = e.target.closest("idea-card").dataset.index;
+ //  	var parsedIdea = JSON.parse(localStorage.getItem(''));
+    if (e.target.className === "idea-article-title") {
+      idea.updateIdea(e.target.innerText, "title");
+    }
+    if (e.target.className === "idea-article-body") {
+      idea.updateIdea(e.target.innerText, "body");
+    }
+}; 
+
+// function handleCardEnter(e) {
+//   if (e.keyCode === 13) {
+//     toBlur.blur();
+//   }
+//   if (e.keyCode === 13) {
+//     toBlur.blur();
+//   }
+// }
 
 function enableSaveBtn() {
 	console.log('I\'m working');
