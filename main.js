@@ -28,7 +28,8 @@ function refillArray() {
 };
 
 function createIdea() {
-	var idea = new Idea(titleInput.value, bodyInput.value);
+
+	var idea = new Idea(titleInput.value, bodyInput.value, Date.now());
 	ideaArray.push(idea);
 	idea.storeIdea(ideaArray);
 	titleInput.value = "";
@@ -66,10 +67,11 @@ outputField.addEventListener('click', function(e) {
 });
 
 function deleteCard(e) {
+	var idea = new Idea()
  e.target.closest('.idea-box').remove();
- var deleteIdea = ideaArray.find(function(deleteIdea) {
- 	return deleteIdea.data === this.data
- })
- deleteIdea.removeIdea(ideaArray);
+ // var deleteIdea = ideaArray.filter(function(deleteIdea) {
+ // 	return deleteIdea.data === this.data
+ // })
+ idea.removeIdea(ideaArray);
  // console.log('idea', idea);
 };

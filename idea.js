@@ -1,8 +1,8 @@
 class Idea {
-	constructor(title, body){
+	constructor(title, body, data){
 		this.title = title;
 		this.body = body;
-		this.data = Date.now();
+		this.data = data;
 		this.star = false;
 		this.quality = 0;
 	}
