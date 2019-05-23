@@ -11,13 +11,17 @@ class Idea {
 		localStorage.setItem('ideaArray',JSON.stringify(ideaArray));
 	}
 
-	removeIdea(array){
+	removeIdea(e){
 		console.log('hey');
-		var ideaArray = array.filter(function(idea) {
-			return idea.data !== this.data
-		});
+		var ideaId = e.target.closest('.idea-box').getAttribute('data-id');
+		var updatedArray = ideaArray.filter(function(arrayItem){
+			if(arrayItem.data !== parseInt(ideaId)) {
+				return arrayItem
+			}
+		})
+		ideaArray = updatedArray;
 		this.storeIdea(ideaArray);
-	}
+	};
 
 	updateIdea(){
 

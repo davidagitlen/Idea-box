@@ -9,6 +9,7 @@ var searchInput = document.getElementById('search-ideas-input');
 var outputField = document.getElementById('output-field');
 
 window.addEventListener('load', refillArray);
+window.addEventListener('load', repopulateIdeaCards);
 saveBtn.addEventListener('click', handleSubmit);
 titleInput.addEventListener('keyup', enableSaveBtn);
 bodyInput.addEventListener('keyup', enableSaveBtn);
@@ -28,7 +29,6 @@ function refillArray() {
 };
 
 function createIdea() {
-
 	var idea = new Idea(titleInput.value, bodyInput.value, Date.now());
 	ideaArray.push(idea);
 	idea.storeIdea(ideaArray);
@@ -80,11 +80,7 @@ outputField.addEventListener('click', function(e) {
 });
 
 function deleteCard(e) {
-	var idea = new Idea()
- e.target.closest('.idea-box').remove();
- // var deleteIdea = ideaArray.filter(function(deleteIdea) {
- // 	return deleteIdea.data === this.data
- // })
- idea.removeIdea(ideaArray);
- // console.log('idea', idea);
+e.target.closest('.idea-box').remove();
+var idea = new Idea;
+idea.removeIdea(e);
 };
