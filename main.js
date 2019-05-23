@@ -20,6 +20,10 @@ outputField.addEventListener('click', function(e) {
  if (e.target.classList.contains('delete-button')) {
    deleteCard(e);
  };
+ if (e.target.classList.contains('star-button')) {
+ 	var star = e.target;
+ 	toggleStar(star);
+ 	}
 });
 
 function handleSubmit() {
@@ -46,13 +50,13 @@ function createIdea() {
 	disableSaveBtn();
 };
 
-function displayIdeaCard({title, body, data}) {
-	outputField.insertAdjacentHTML('afterbegin', 	
-		`<section class="idea-box" data-id=${data}>
-			<header class="idea-header"><input type="image" src="idea-box-icons/star.svg" height="30px" width="30px"><input type="image" src="idea-box-icons/delete.svg" class="delete-button" height="30px" width="30px"></header>
+function displayIdeaCard({title, body, data, star, quality}) {
+	var starSrc = star ? 'star-active.svg' : 'star.svg';
+	outputField.insertAdjacentHTML('afterbegin', 	`<section class="idea-box" data-id=${data}>
+			<header class="idea-header"><input type="image" class="star-button" src="idea-box-icons/${starSrc}" height="30px" width="30px"><input type="image" src="idea-box-icons/delete.svg" class="delete-button" height="30px" width="30px"></header>
 			<article class="idea-article">
-				<p class="idea-article-title" id="idea-title" contenteditable = 'true'>${title}<p>
-				<p class="idea-article-body" id="idea-body" contenteditable = 'true'>${body}</p>
+				<p class="idea-article-title" id="idea-title" contenteditable="true">${title}<p>
+				<p class="idea-article-body" id="idea-body" contenteditable="true">${body}</p>
 			</article>
 			<footer class="idea-footer"><input type="image" src="idea-box-icons/upvote.svg" height="30px" width="30px"><p class= "idea-footer-text">Quality:&nbsp;&nbsp;<span>Swill</span></p><input type="image" src="idea-box-icons/downvote.svg" height="30px" width="30px"></footer>
 		</section>`)
@@ -60,9 +64,9 @@ function displayIdeaCard({title, body, data}) {
 
 function repopulateIdeaCards() {
 	for (var i = 0; i < ideaArray.length; i++) {
-		displayIdeaCard(arrayIdea[i]);
+	  displayIdeaCard(ideaArray[i]);
 	}
-};
+}
 
 function editIdeaCard(e) {
 	// var '' = e.target.closest("idea-card").dataset.index;
@@ -89,15 +93,29 @@ function enableSaveBtn() {
 	if (titleInput.value !== "" || bodyInput.value !== "") {
 		saveBtn.disabled = false;
 	}
-};
+}
 
 function disableSaveBtn() {
 	saveBtn.disabled = true;
-};
+}
 
 function deleteCard(e) {
-e.target.closest('.idea-box').remove();
-var ideaId = e.target.closest('.idea-box').getAttribute('data-id');
-var idea = new Idea;
-idea.removeIdea(ideaId);
-};
+	e.target.closest('.idea-box').remove();
+	var ideaId = e.target.closest('.idea-box').getAttribute('data-id');
+	var idea = new Idea;
+	idea.removeIdea(ideaId);
+}
+
+function toggleStar(star) {
+	var ideaId = star.closest('.idea-box').getAttribute('data-id');
+	var targetIdea = ideaArray.find(function(idea) {
+		return idea.data == ideaId;
+	});
+	targetIdea.star = !targetIdea.star;
+	if(targetIdea.star) {
+		star.setAttribute('src', 'idea-box-icons/star-active.svg');
+	} else {
+		star.setAttribute('src', 'idea-box-icons/star.svg');
+	}
+	targetIdea.storeIdea(ideaArray);
+}
