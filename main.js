@@ -94,6 +94,5 @@ function toggleStar(star) {
 	} else {
 		star.setAttribute('src', 'idea-box-icons/star.svg');
 	}
-
 	targetIdea.storeIdea(ideaArray);
 }
