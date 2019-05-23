@@ -49,6 +49,19 @@ function displayIdeaCard({title, body, data}) {
 		</section>`)
 };
 
+function repopulateIdeaCards() {
+	for (var i = 0; i < ideaArray.length; i++) {
+	outputField.insertAdjacentHTML('afterbegin', 	`<section class="idea-box" data-id=${ideaArray[i].data}>
+			<header class="idea-header"><input type="image" src="idea-box-icons/star.svg" height="30px" width="30px"><input type="image" src="idea-box-icons/delete.svg" class="delete-button" height="30px" width="30px"></header>
+			<article class="idea-article">
+				<p>${ideaArray[i].title}<p>
+				<p>${ideaArray[i].body}</p>
+			</article>
+			<footer class="idea-footer"><input type="image" src="idea-box-icons/upvote.svg" height="30px" width="30px"><p class= "idea-footer-text">Quality:&nbsp;&nbsp;<span>Swill</span></p><input type="image" src="idea-box-icons/downvote.svg" height="30px" width="30px"></footer>
+		</section>`)
+	}
+};
+
 function enableSaveBtn() {
 	console.log('I\'m working');
 	if (titleInput.value !== "" || bodyInput.value !== "") {
