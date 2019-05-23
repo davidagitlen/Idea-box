@@ -11,10 +11,9 @@ class Idea {
 		localStorage.setItem('ideaArray',JSON.stringify(ideaArray));
 	}
 
-	removeIdea(e){
+	removeIdea(ideaId){
 		console.log('hey');
-		var ideaId = e.target.closest('.idea-box').getAttribute('data-id');
-		var updatedArray = ideaArray.filter(function(arrayItem){
+			var updatedArray = ideaArray.filter(function(arrayItem){
 			if(arrayItem.data !== parseInt(ideaId)) {
 				return arrayItem
 			}

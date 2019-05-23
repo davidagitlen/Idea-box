@@ -13,6 +13,11 @@ window.addEventListener('load', repopulateIdeaCards);
 saveBtn.addEventListener('click', handleSubmit);
 titleInput.addEventListener('keyup', enableSaveBtn);
 bodyInput.addEventListener('keyup', enableSaveBtn);
+outputField.addEventListener('click', function(e) {
+ if (e.target.classList.contains('delete-button')) {
+   deleteCard(e);
+ };
+});
 
 function handleSubmit() {
 	createIdea();
@@ -73,14 +78,9 @@ function disableSaveBtn() {
 	saveBtn.disabled = true;
 };
 
-outputField.addEventListener('click', function(e) {
- if (e.target.classList.contains('delete-button')) {
-   deleteCard(e);
- };
-});
-
 function deleteCard(e) {
 e.target.closest('.idea-box').remove();
+var ideaId = e.target.closest('.idea-box').getAttribute('data-id');
 var idea = new Idea;
-idea.removeIdea(e);
+idea.removeIdea(ideaId);
 };
