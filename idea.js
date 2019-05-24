@@ -12,20 +12,19 @@ class Idea {
 	}
 
 	removeIdea(ideaId){
-		console.log('hey');
-			var updatedArray = ideaArray.filter(function(arrayItem){
+		var updatedArray = ideaArray.filter(function(arrayItem){
 			if(arrayItem.data !== parseInt(ideaId)) {
 				return arrayItem
 			}
 		})
 		ideaArray = updatedArray;
 		this.storeIdea(ideaArray);
-	};
+	}
 
 	updateIdea(){ 
- }	
+ 	}	
 
 	updateQuality(){
-		this.quality++
+		//this.quality++
 	}
 };

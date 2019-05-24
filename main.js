@@ -60,9 +60,9 @@ function displayIdeaCard({title, body, data}) {
 
 function repopulateIdeaCards() {
 	for (var i = 0; i < ideaArray.length; i++) {
-		displayIdeaCard(arrayIdea[i]);
+		displayIdeaCard(ideaArray[i]);
 	}
-};
+}
 
 function editIdeaCard(e) {
 	// var '' = e.target.closest("idea-card").dataset.index;
@@ -85,7 +85,6 @@ function editIdeaCard(e) {
 // }
 
 function enableSaveBtn() {
-	console.log('I\'m working');
 	if (titleInput.value !== "" || bodyInput.value !== "") {
 		saveBtn.disabled = false;
 	}
