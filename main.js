@@ -51,13 +51,14 @@ function createIdea() {
 
 function displayIdeaCard({title, body, data, star, quality}) {
 	var starSrc = star ? 'star-active.svg' : 'star.svg';
-	outputField.insertAdjacentHTML('afterbegin', 	`<section class="idea-box" data-id=${data}>
-			<header class="idea-header"><input type="image" class="star-button" src="idea-box-icons/${starSrc}" height="30px" width="30px"><input type="image" src="idea-box-icons/delete.svg" class="delete-button" height="30px" width="30px"></header>
+	outputField.insertAdjacentHTML('afterbegin', 	
+		`<section class="idea-box" data-id=${data}>
+			<header class="idea-header"><input type="image" class="star-button" src="idea-box-icons/${starSrc}"><input type="image" src="idea-box-icons/delete.svg" class="delete-button"></header>
 			<article class="idea-article">
 				<p class="idea-article-title" id="idea-title" contenteditable="true">${title}<p>
 				<p class="idea-article-body" id="idea-body" contenteditable="true">${body}</p>
 			</article>
-			<footer class="idea-footer"><input type="image" src="idea-box-icons/upvote.svg" height="30px" width="30px"><p class= "idea-footer-text">Quality:&nbsp;&nbsp;<span>Swill</span></p><input type="image" src="idea-box-icons/downvote.svg" height="30px" width="30px"></footer>
+			<footer class="idea-footer"><input type="image" class="upvote-button" src="idea-box-icons/upvote.svg"><p class= "idea-footer-text">Quality:&nbsp;&nbsp;<span>Swill</span></p><input type="image" class="downvote-button" src="idea-box-icons/downvote.svg"></footer>
 		</section>`)
 };
 
@@ -68,7 +69,7 @@ function repopulateIdeaCards() {
 }
 
 function handleCardEdit(e) {
-	console.log(e.keyCode);
+	// console.log(e.keyCode);
   if (e.keyCode === 13) {
   	var title = e.target.closest('.idea-article').querySelector('#idea-title').innerText;
   	var body = e.target.closest('.idea-article').querySelector('#idea-body').innerText;

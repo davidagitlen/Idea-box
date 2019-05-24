@@ -3,9 +3,9 @@
 }
 
 body {
+	display: grid;
 	font-family: Open Sans, sans-serif;
 	font-weight: 300;
-	display: grid;
 	grid-template-columns: 1fr 5fr;
 	grid-template-rows: 2fr 4fr;
 	grid-template-areas:
@@ -21,8 +21,8 @@ h1 {
 }
 
 h2 {
-	font-size: 14px;
 	color: #BFBFDD;
+	font-size: 14px;
 	padding-bottom: 10px;
 }
 
@@ -39,15 +39,15 @@ ul {
 }
 
 li {
-	margin: 15px 0px 15px 0px;
+	color: #FFFFFF;
 	list-style: none;
-	color: #FFFFFF
+	margin: 15px 0px 15px 0px;
 }
 
 input {
+	border-color: #353567;
 	border-radius: 1px;
 	border-width: .5px;
-	border-color: #353567;
 }
 
 main {
@@ -56,14 +56,14 @@ main {
 }
 
 output {
+	background-color: #EAEAF4;
 	display: grid;
+	grid-area: output;
+	grid-gap: 10px;
 	grid-template-columns: 1fr 1fr 1fr;
 	grid-template-rows: 1fr 1fr;
-	grid-gap: 10px;
-	background-color: #EAEAF4;
-	grid-area: output;
-	padding: 20px;
 	height: 100%;
+	padding: 20px;
 }
 
 legend {
@@ -75,17 +75,17 @@ fieldset {
 }
 
 .sidebar {
+	background-color: #1F1F3D;
 	display: flex;
 	flex-direction: column;
-	background-color: #1F1F3D;
 	grid-area: sidebar;
 }
 
 .header-section {
-	border-top: 1px solid #353567;
 	border-bottom: 1px solid #353567;
-	padding: 0px 13px 10px 13px;
+	border-top: 1px solid #353567;
 	margin-bottom: 10px;
+	padding: 0px 13px 10px 13px;
 }
 
 .header-form {
@@ -97,19 +97,19 @@ fieldset {
 }
 
 .header-button {
-	color: #E9E9F3;
 	background-color: #5356A4;
 	border-color: #353567;
-	margin-bottom: 15px;
+	color: #E9E9F3;
 	height: 2.5em;
+	margin-bottom: 15px;
 	width: 100%;
 }
 
 .quality-input {
 	height: 2.5em;
-	width: 100%;
-	margin-top: 10px;
 	margin-bottom: 15px;
+	margin-top: 10px;
+	width: 100%;
 }
 
 .main-form {
@@ -132,25 +132,27 @@ fieldset {
 }
 
 .title-input {
+	border-radius: 1.5px;
+	height: 2.5em;
 	margin: 10px 0px 20px 0px;
 	width: 90%;
-	height: 2.5em;
 }
 
 .body-input {
-	resize: none;
-	margin: 10px 0px 20px 0px;
-	width: 90%;
+	border-radius: 1.5px;
 	height: 6em;
+	margin: 10px 0px 20px 0px;
+	resize: none;
+	width: 90%;
 }
 
 .save-button {
-	color: #FFFFFF;
-	margin: 10px 0px 20px 0px;
+	background-color: #1f1f3d;
 	border: 0;
-	background-color: #5356A4;
-	width: 90%;
+	color: #FFFFFF;
 	height: 3em;
+	margin: 10px 0px 20px 0px;
+	width: 90%;
 }
 
 .search-items {
@@ -159,39 +161,47 @@ fieldset {
 }
 
 .search-icon {
-	background-color: #5356A4;
-	margin: 10px 0px 5px 0px;
+	background-color: #1f1f3d;
+	border-radius: 1.5px;
 	height: 2.5em;
-	padding: 5px;
+	margin: 10px 0px 5px 0px;
+	padding: 9px;
 	width: 10%;
 }
 
 .search-ideas-input {
-	margin: 10px 0px 5px 0px;
-	width: 100%;
+	border-radius: 1.5px;
 	height: 2.5em;
+	margin: 10px 0px 5px 0px;
+	padding-left: 7px;
+	width: 100%;
 	width: 80%;
 }
 
 .idea-box {
+	border: 1px solid #6E646B;
 	display: flex;
 	flex-direction: column;
-	justify-self: center;
-	border: 1px solid #6E646B;
 	height: 350px;
+	justify-self: center;
 	width: 85%;
 }
 
 .idea-header {
-	display: flex;
-	justify-content: space-between;
-	height: 30px;
 	background-color: #1F1F3D;
+	display: flex;
+	height: 30px;
+	justify-content: space-between;
+}
+
+.star-button, .delete-button {
+	height: 30px;
+	width: 30px;
 }
 
 .idea-article {
-	height: 300px;
 	background-color: #FFFFFF;
+	height: 300px;
 	padding: 10px;
 }
 
@@ -202,22 +212,27 @@ fieldset {
 } 	
 
 .idea-footer {
-	display: flex;
-	justify-content: space-between;
 	align-items: center;
-	height: 30px;
 	background-color: #5356A4;
+	display: flex;
+	height: 30px;
+	justify-content: space-between;
 }
 
 .idea-footer-text {
-	font-weight: 600;
 	color: #FFFFFF;
+	font-weight: 600;
+}
+
+.upvote-button, .downvote-button {
+	height: 30px;
+	width: 30px;
 }
 
 .no-idea-yet-text {
+	display: none;
+	font-family: 'Indie Flower', cursive;
+	font-size: 72px;
 	position: absolute;
 	text-align: center;
-	font-size: 72px;
-	font-family: 'Indie Flower', cursive;
-	display: none;
 }
