@@ -1,10 +1,10 @@
 class Idea {
-	constructor(title, body, data){
+	constructor(title, body, data, star, quality){
 		this.title = title;
 		this.body = body;
 		this.data = data;
-		this.star = false;
-		this.quality = 0;
+		this.star = star || false;
+		this.quality = quality || 0;
 	}
 
 	storeIdea(ideaArray){
@@ -17,12 +17,20 @@ class Idea {
 				return arrayItem
 			}
 		})
+
 		ideaArray = updatedArray;
 		this.storeIdea(ideaArray);
 	}
 
-	updateIdea(){ 
- 	}	
+
+	updateIdea(title, body){ 
+		this.title = title;
+		this.body = body;
+ 	}
+
+ 	updateStar() {
+ 		this.star = !this.star;
+ 	}
 
 	updateQuality(){
 		//this.quality++
