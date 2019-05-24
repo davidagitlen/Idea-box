@@ -189,6 +189,11 @@ fieldset {
 	background-color: #1F1F3D;
 }
 
+.star-button, .delete-button {
+	height: 30px;
+	width: 30px;
+}
+
 .idea-article {
 	height: 300px;
 	background-color: #FFFFFF;
@@ -212,6 +217,11 @@ fieldset {
 .idea-footer-text {
 	font-weight: 600;
 	color: #FFFFFF;
+}
+
+.upvote-button, .downvote-button {
+	height: 30px;
+	width: 30px;
 }
 
 .no-idea-yet-text {
