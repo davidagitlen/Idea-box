@@ -22,7 +22,22 @@ outputField.addEventListener('click', function(e) {
  if (e.target.classList.contains('star-button')) {
  	var star = e.target;
  	toggleStar(star);
- 	}
+ };
+ //added in two more events onto this one event listener, not sure how to arrange them in a similar way to the star one above with function below
+ if (e.target.classList.contains('upvote-button')) {
+	var upvote = e.target;
+ 	var ideaId = e.target.closest('.idea-box').getAttribute('data-id');
+ 	console.log('upvote here!')
+	var targetIdea = findIdea(ideaId);
+	targetIdea.updateQuality('upvote');
+ };
+ if (e.target.classList.contains('downvote-button')) {
+ 	var downvote = e.target;
+ 	var ideaId = downvote.closest('.idea-box').getAttribute('data-id');
+ 	console.log('downvote here!')
+	var targetIdea = findIdea(ideaId);
+	targetIdea.updateQuality('downvote');
+ }
 });
 
 function handleSubmit() {
@@ -66,10 +81,9 @@ function repopulateIdeaCards() {
 	for (var i = 0; i < ideaArray.length; i++) {
 		displayIdeaCard(ideaArray[i]);
 	}
-}
+};
 
 function handleCardEdit(e) {
-	// console.log(e.keyCode);
   if (e.keyCode === 13) {
   	var title = e.target.closest('.idea-article').querySelector('#idea-title').innerText;
   	var body = e.target.closest('.idea-article').querySelector('#idea-body').innerText;
@@ -79,24 +93,24 @@ function handleCardEdit(e) {
     ideaToUpdate.updateIdea(title, body);
     ideaToUpdate.storeIdea(ideaArray);
   }
-}
+};
 
 function enableSaveBtn() {
 	if (titleInput.value !== "" || bodyInput.value !== "") {
 		saveBtn.disabled = false;
 	}
-}
+};
 
 function disableSaveBtn() {
 	saveBtn.disabled = true;
-}
+};
 
 function deleteCard(e) {
 	e.target.closest('.idea-box').remove();
 	var ideaId = e.target.closest('.idea-box').getAttribute('data-id');
 	var idea = new Idea;
 	idea.removeIdea(ideaId);
-}
+};
 
 function toggleStar(star) {
 	var ideaId = star.closest('.idea-box').getAttribute('data-id');
@@ -108,10 +122,10 @@ function toggleStar(star) {
 		star.setAttribute('src', 'idea-box-icons/star.svg');
 	}
 	targetIdea.storeIdea(ideaArray);
-}
+};
 
 function findIdea(id) {
 	return ideaArray.find(function(idea) {
 		return idea.data == id;
-	});
-}
+	})
+};

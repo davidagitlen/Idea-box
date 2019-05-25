@@ -1,10 +1,11 @@
 class Idea {
-	constructor(title, body, data, star, quality){
+	constructor(title, body, data, star, quality, qualityRating){
 		this.title = title;
 		this.body = body;
 		this.data = data;
 		this.star = star || false;
 		this.quality = quality || 0;
+		this.qualityRating = qualityRating;
 	}
 
 	storeIdea(ideaArray){
@@ -32,7 +33,16 @@ class Idea {
  		this.star = !this.star;
  	}
 
-	updateQuality(){
-		//this.quality++
+	updateQuality(vote){
+		var qualityArray = ['Swill', 'Plausible', 'Genius'];
+		if (vote === 'upvote' && this.quality !== 2){
+			console.log('trying to upvote')
+			this.quality++
+		} if (vote === 'downvote' && this.quality !== 0) {
+			console.log('trying to downvote')
+			this.quality-- 
+		}
+		this.qualityRating = qualityArray[this.quality];
+		this.storeIdea(ideaArray);
 	}
 };
