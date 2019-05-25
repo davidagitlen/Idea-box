@@ -4,7 +4,7 @@ class Idea {
 		this.body = body;
 		this.data = data;
 		this.star = star || false;
-		this.quality = quality || 0;
+		this.quality = quality;
 		this.qualityRating = qualityRating;
 	}
 
@@ -36,13 +36,11 @@ class Idea {
 	updateQuality(vote){
 		var qualityArray = ['Swill', 'Plausible', 'Genius'];
 		if (vote === 'upvote' && this.quality !== 2){
-			console.log('trying to upvote')
 			this.quality++
-		} if (vote === 'downvote' && this.quality !== 0) {
-			console.log('trying to downvote')
+		} 
+		if (vote === 'downvote' && this.quality !== 0) {
 			this.quality-- 
 		}
 		this.qualityRating = qualityArray[this.quality];
-		this.storeIdea(ideaArray);
-	}
+		}
 };

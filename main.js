@@ -16,30 +16,22 @@ titleInput.addEventListener('keyup', enableSaveBtn);
 bodyInput.addEventListener('keyup', enableSaveBtn);
 outputField.addEventListener('keydown', handleCardEdit);
 outputField.addEventListener('focusout', focusOutEvent);
-outputField.addEventListener('click', function(e) {
+outputField.addEventListener('click', handleCardButtons);
+
+function handleCardButtons(e) {
  if (e.target.classList.contains('delete-button')) {
    deleteCard(e);
  };
  if (e.target.classList.contains('star-button')) {
- 	var star = e.target;
- 	toggleStar(star);
+ 	toggleStar(e);
  };
- //added in two more events onto this one event listener, not sure how to arrange them in a similar way to the star one above with function below
  if (e.target.classList.contains('upvote-button')) {
-	var upvote = e.target;
- 	var ideaId = e.target.closest('.idea-box').getAttribute('data-id');
- 	console.log('upvote here!')
-	var targetIdea = findIdea(ideaId);
-	targetIdea.updateQuality('upvote');
+	toggleUpvote(e);
  };
  if (e.target.classList.contains('downvote-button')) {
- 	var downvote = e.target;
- 	var ideaId = downvote.closest('.idea-box').getAttribute('data-id');
- 	console.log('downvote here!')
-	var targetIdea = findIdea(ideaId);
-	targetIdea.updateQuality('downvote');
+	toggleDownvote(e);
  }
-});
+};
 
 function handleSubmit() {
 	createIdea();
@@ -50,13 +42,13 @@ function refillArray() {
 		return;
 	} else {
 	var newArray = JSON.parse(localStorage.getItem('ideaArray')).map(function(array) {
-		return new Idea(array.title, array.body, array.data, array.star, array.quality);
+		return new Idea(array.title, array.body, array.data, array.star, array.quality, array.qualityRating);
 	});
 	ideaArray = newArray;}
 };
 
 function createIdea() {
-	var idea = new Idea(titleInput.value, bodyInput.value, Date.now());
+	var idea = new Idea(titleInput.value, bodyInput.value, Date.now(), false, 0, ['Swill', 'Plausible', 'Genius']);
 	ideaArray.push(idea);
 	idea.storeIdea(ideaArray);
 	titleInput.value = "";
@@ -65,16 +57,23 @@ function createIdea() {
 	disableSaveBtn();
 };
 
-function displayIdeaCard({title, body, data, star, quality}) {
+function displayIdeaCard({title, body, data, star, quality, qualityRating}) {
 	var starSrc = star ? 'star-active.svg' : 'star.svg';
 	outputField.insertAdjacentHTML('afterbegin', 	
 		`<section class="idea-box" data-id=${data}>
-			<header class="idea-header"><input type="image" class="star-button" src="idea-box-icons/${starSrc}"><input type="image" src="idea-box-icons/delete.svg" class="delete-button"></header>
+			<header class="idea-header">
+				<input type="image" class="star-button" src="idea-box-icons/${starSrc}">
+				<input type="image" src="idea-box-icons/delete.svg" class="delete-button">
+			</header>
 			<article class="idea-article">
 				<p class="idea-article-title" id="idea-title" contenteditable="true">${title}<p>
 				<p class="idea-article-body" id="idea-body" contenteditable="true">${body}</p>
 			</article>
-			<footer class="idea-footer"><input type="image" class="upvote-button" src="idea-box-icons/upvote.svg"><p class= "idea-footer-text">Quality:&nbsp;&nbsp;<span>Swill</span></p><input type="image" class="downvote-button" src="idea-box-icons/downvote.svg"></footer>
+			<footer class="idea-footer">
+				<input type="image" class="upvote-button" src="idea-box-icons/upvote.svg">
+				<p class= "quality-text">Quality:&nbsp;&nbsp;${qualityRating[0]}</p>
+				<input type="image" class="downvote-button" src="idea-box-icons/downvote.svg">
+			</footer>
 		</section>`)
 };
 
@@ -124,17 +123,47 @@ function deleteCard(e) {
 	idea.removeIdea(ideaId);
 };
 
-function toggleStar(star) {
-	var ideaId = star.closest('.idea-box').getAttribute('data-id');
+function toggleStar(e) {
+	var ideaId = e.target.closest('.idea-box').getAttribute('data-id');
 	var targetIdea = findIdea(ideaId);
 	targetIdea.updateStar();
 	if(targetIdea.star) {
-		star.setAttribute('src', 'idea-box-icons/star-active.svg');
+		e.target.setAttribute('src', 'idea-box-icons/star-active.svg');
 	} else {
-		star.setAttribute('src', 'idea-box-icons/star.svg');
+		e.target.setAttribute('src', 'idea-box-icons/star.svg');
 	}
 	targetIdea.storeIdea(ideaArray);
 };
+
+function toggleUpvote(e) {
+	var qualityText = e.target.closest('.idea-footer').querySelector('.quality-text');
+	var ideaId = e.target.closest('.idea-box').getAttribute('data-id');
+	var targetIdea = findIdea(ideaId);
+	targetIdea.updateQuality('upvote');
+	if (targetIdea.quality === 0) {
+	qualityText.innerText =	"Quality:  " + targetIdea.qualityRating
+	} if (targetIdea.quality === 1) {
+	qualityText.innerText = "Quality:  " + targetIdea.qualityRating
+	} if (targetIdea.quality === 2) {
+	qualityText.innerText = "Quality:  " + targetIdea.qualityRating
+	}
+	targetIdea.storeIdea(ideaArray);
+}
+
+function toggleDownvote(e) {
+	var qualityText = e.target.closest('.idea-footer').querySelector('.quality-text');
+	var ideaId = e.target.closest('.idea-box').getAttribute('data-id');
+	var targetIdea = findIdea(ideaId);
+	targetIdea.updateQuality('downvote');
+	if (targetIdea.quality === 0) {
+	qualityText.innerText =	"Quality:  " + targetIdea.qualityRating
+	} if (targetIdea.quality === 1) {
+	qualityText.innerText = "Quality:  " + targetIdea.qualityRating
+	} if (targetIdea.quality === 2) {
+	qualityText.innerText = "Quality:  " + targetIdea.qualityRating
+	}
+	targetIdea.storeIdea(ideaArray);
+}
 
 function findIdea(id) {
 	return ideaArray.find(function(idea) {
