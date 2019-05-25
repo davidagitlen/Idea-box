@@ -14,7 +14,8 @@ window.addEventListener('load', repopulateIdeaCards);
 saveBtn.addEventListener('click', handleSubmit);
 titleInput.addEventListener('keyup', enableSaveBtn);
 bodyInput.addEventListener('keyup', enableSaveBtn);
-outputField.addEventListener('keydown', handleCardEdit)
+outputField.addEventListener('keydown', handleCardEdit);
+outputField.addEventListener('focusout', focusOutEvent);
 outputField.addEventListener('click', function(e) {
  if (e.target.classList.contains('delete-button')) {
    deleteCard(e);
@@ -69,7 +70,6 @@ function repopulateIdeaCards() {
 }
 
 function handleCardEdit(e) {
-	// console.log(e.keyCode);
   if (e.keyCode === 13) {
   	var title = e.target.closest('.idea-article').querySelector('#idea-title').innerText;
   	var body = e.target.closest('.idea-article').querySelector('#idea-body').innerText;
@@ -80,6 +80,17 @@ function handleCardEdit(e) {
     ideaToUpdate.storeIdea(ideaArray);
   }
 }
+
+function focusOutEvent(e) {
+	 	var title = e.target.closest('.idea-article').querySelector('#idea-title').innerText;
+  	var body = e.target.closest('.idea-article').querySelector('#idea-body').innerText;
+    e.target.blur();
+    var ideaId = e.target.closest('.idea-box').getAttribute('data-id');
+    var ideaToUpdate = findIdea(ideaId);
+    ideaToUpdate.updateIdea(title, body);
+    ideaToUpdate.storeIdea(ideaArray);
+}
+
 
 function enableSaveBtn() {
 	if (titleInput.value !== "" || bodyInput.value !== "") {
