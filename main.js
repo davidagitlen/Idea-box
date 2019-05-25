@@ -14,7 +14,8 @@ window.addEventListener('load', repopulateIdeaCards);
 saveBtn.addEventListener('click', handleSubmit);
 titleInput.addEventListener('keyup', enableSaveBtn);
 bodyInput.addEventListener('keyup', enableSaveBtn);
-outputField.addEventListener('keydown', handleCardEdit)
+outputField.addEventListener('keydown', handleCardEdit);
+outputField.addEventListener('focusout', focusOutEvent);
 outputField.addEventListener('click', function(e) {
  if (e.target.classList.contains('delete-button')) {
    deleteCard(e);
@@ -64,12 +65,11 @@ function displayIdeaCard({title, body, data, star, quality}) {
 
 function repopulateIdeaCards() {
 	for (var i = 0; i < ideaArray.length; i++) {
-	  displayIdeaCard(ideaArray[i]);
+		displayIdeaCard(ideaArray[i]);
 	}
 }
 
 function handleCardEdit(e) {
-	// console.log(e.keyCode);
   if (e.keyCode === 13) {
   	var title = e.target.closest('.idea-article').querySelector('#idea-title').innerText;
   	var body = e.target.closest('.idea-article').querySelector('#idea-body').innerText;
@@ -81,8 +81,18 @@ function handleCardEdit(e) {
   }
 }
 
+function focusOutEvent(e) {
+	 	var title = e.target.closest('.idea-article').querySelector('#idea-title').innerText;
+  	var body = e.target.closest('.idea-article').querySelector('#idea-body').innerText;
+    e.target.blur();
+    var ideaId = e.target.closest('.idea-box').getAttribute('data-id');
+    var ideaToUpdate = findIdea(ideaId);
+    ideaToUpdate.updateIdea(title, body);
+    ideaToUpdate.storeIdea(ideaArray);
+}
+
+
 function enableSaveBtn() {
-	console.log('I\'m working');
 	if (titleInput.value !== "" || bodyInput.value !== "") {
 		saveBtn.disabled = false;
 	}

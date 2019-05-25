@@ -12,8 +12,7 @@ class Idea {
 	}
 
 	removeIdea(ideaId){
-		console.log('hey');
-			var updatedArray = ideaArray.filter(function(arrayItem){
+		var updatedArray = ideaArray.filter(function(arrayItem){
 			if(arrayItem.data !== parseInt(ideaId)) {
 				return arrayItem
 			}
@@ -22,6 +21,7 @@ class Idea {
 		ideaArray = updatedArray;
 		this.storeIdea(ideaArray);
 	}
+
 
 	updateIdea(title, body){ 
 		this.title = title;
@@ -33,6 +33,6 @@ class Idea {
  	}
 
 	updateQuality(){
-		this.quality++
+		//this.quality++
 	}
 };
