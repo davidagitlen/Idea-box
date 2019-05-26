@@ -14,6 +14,7 @@ window.addEventListener('load', repopulateIdeaCards);
 saveBtn.addEventListener('click', handleSubmit);
 titleInput.addEventListener('keyup', enableSaveBtn);
 bodyInput.addEventListener('keyup', enableSaveBtn);
+searchInput.addEventListener('keyup', searchFilter);
 outputField.addEventListener('keydown', handleCardEdit);
 outputField.addEventListener('focusout', focusOutEvent);
 outputField.addEventListener('click', function(e) {
@@ -106,7 +107,6 @@ function focusOutEvent(e) {
     ideaToUpdate.storeIdea(ideaArray);
 }
 
-
 function enableSaveBtn() {
 	if (titleInput.value !== "" || bodyInput.value !== "") {
 		saveBtn.disabled = false;
@@ -140,4 +140,15 @@ function findIdea(id) {
 	return ideaArray.find(function(idea) {
 		return idea.data == id;
 	})
+};
+
+function searchFilter() {
+  outputField.innerHTML = '';
+  var searchText = document.querySelector('#search-ideas-input').value.toLowerCase();
+  var filteredIdeas = ideaArray.filter(function(idea) {
+    return (idea.title.toLowerCase().includes(searchText) || idea.body.toLowerCase().includes(searchText)) 
+  });
+  filteredIdeas.forEach(function(idea) {
+    displayIdeaCard(idea);
+  })
 };
