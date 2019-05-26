@@ -1,11 +1,11 @@
 class Idea {
-	constructor(title, body, data, star, quality, qualityRating){
+	constructor(title, body, data, star, quality){
 		this.title = title;
 		this.body = body;
 		this.data = data;
 		this.star = star || false;
 		this.quality = quality;
-		this.qualityRating = qualityRating;
+		this.qualityRating = ['Swill', 'Plausible', 'Genius'];
 	}
 
 	storeIdea(ideaArray){
@@ -43,4 +43,5 @@ class Idea {
 		}
 		this.qualityRating = qualityArray[this.quality];
 		}
+
 };

@@ -42,13 +42,13 @@ function refillArray() {
 		return;
 	} else {
 	var newArray = JSON.parse(localStorage.getItem('ideaArray')).map(function(array) {
-		return new Idea(array.title, array.body, array.data, array.star, array.quality, array.qualityRating);
+		return new Idea(array.title, array.body, array.data, array.star, array.quality);
 	});
 	ideaArray = newArray;}
 };
 
 function createIdea() {
-	var idea = new Idea(titleInput.value, bodyInput.value, Date.now(), false, 0, ['Swill', 'Plausible', 'Genius']);
+	var idea = new Idea(titleInput.value, bodyInput.value, Date.now(), false, 0);
 	ideaArray.push(idea);
 	idea.storeIdea(ideaArray);
 	titleInput.value = "";
@@ -56,6 +56,7 @@ function createIdea() {
 	displayIdeaCard(idea);
 	disableSaveBtn();
 };
+
 
 function displayIdeaCard({title, body, data, star, quality, qualityRating}) {
 	var starSrc = star ? 'star-active.svg' : 'star.svg';
@@ -71,7 +72,7 @@ function displayIdeaCard({title, body, data, star, quality, qualityRating}) {
 			</article>
 			<footer class="idea-footer">
 				<input type="image" class="upvote-button" src="idea-box-icons/upvote.svg">
-				<p class= "quality-text">Quality:&nbsp;&nbsp;${qualityRating[0]}</p>
+				<p class= "quality-text">Quality:&nbsp;&nbsp;${qualityRating[quality]}</p>
 				<input type="image" class="downvote-button" src="idea-box-icons/downvote.svg">
 			</footer>
 		</section>`)
@@ -98,7 +99,6 @@ function handleCardEdit(e) {
 function focusOutEvent(e) {
 	 	var title = e.target.closest('.idea-article').querySelector('#idea-title').innerText;
   	var body = e.target.closest('.idea-article').querySelector('#idea-body').innerText;
-    e.target.blur();
     var ideaId = e.target.closest('.idea-box').getAttribute('data-id');
     var ideaToUpdate = findIdea(ideaId);
     ideaToUpdate.updateIdea(title, body);
