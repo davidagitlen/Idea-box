@@ -12,31 +12,19 @@ var ideaCard = document.querySelector('.idea-box');
 window.addEventListener('load', refillArray);
 window.addEventListener('load', repopulateIdeaCards);
 starredIdeasBtn.addEventListener('click', showStarredIdeas)
-saveBtn.addEventListener('click', handleSubmit);
+saveBtn.addEventListener('click', createIdea);
 titleInput.addEventListener('keyup', handleSaveBtn);
 bodyInput.addEventListener('keyup', handleSaveBtn);
-searchInput.addEventListener('keyup', searchFilter);
+searchInput.addEventListener('keyup', handleSearch);
 outputField.addEventListener('keydown', handleCardEdit);
 outputField.addEventListener('focusout', focusOutEvent);
 outputField.addEventListener('click', handleCardButtons);
 
 function handleCardButtons(e) {
- if (e.target.classList.contains('delete-button')) {
-   deleteCard(e);
- };
- if (e.target.classList.contains('star-button')) {
+  deleteCard(e);
  	toggleStar(e);
- };
- if (e.target.classList.contains('upvote-button')) {
-	toggleUpvote(e);
- };
- if (e.target.classList.contains('downvote-button')) {
-	toggleDownvote(e);
- }
-};
-
-function handleSubmit() {
-	createIdea();
+	toggleVote(e, 'upvote', 'upvote-button');
+	toggleVote(e, 'downvote', 'downvote-button');
 };
 
 function refillArray() {
@@ -113,12 +101,15 @@ function handleSaveBtn() {
 };
 
 function deleteCard(e) {
+	if (e.target.classList.contains('delete-button')) {
 	e.target.closest('.idea-box').remove();
 	var targetIdea = getIdeaFromArray(e);
 	targetIdea.removeIdea(targetIdea);
+	}
 };
 
 function toggleStar(e) {
+	if (e.target.classList.contains('star-button')){
 	var targetIdea = getIdeaFromArray(e);
 	targetIdea.updateStar();
 	if(targetIdea.star) {
@@ -127,26 +118,19 @@ function toggleStar(e) {
 		e.target.setAttribute('src', 'idea-box-icons/star.svg');
 	}
 	targetIdea.storeIdea(ideaArray);
+	}
 };
 
-function toggleUpvote(e) {
+function toggleVote(e, vote, location) {
+	if (e.target.classList.contains(location)) {
 	var qualityText = e.target.closest('.idea-footer').querySelector('.quality-text');
 	var targetIdea = getIdeaFromArray(e);
-	targetIdea.updateQuality('upvote');
-	if (targetIdea.quality === 0) {
-	qualityText.innerText =	"Quality:  " + targetIdea.qualityRating
-	} if (targetIdea.quality === 1) {
-	qualityText.innerText = "Quality:  " + targetIdea.qualityRating
-	} if (targetIdea.quality === 2) {
-	qualityText.innerText = "Quality:  " + targetIdea.qualityRating
+	targetIdea.updateQuality(vote);
+	changeQualityText(targetIdea, qualityText);
 	}
-	targetIdea.storeIdea(ideaArray);
 }
 
-function toggleDownvote(e) {
-	var qualityText = e.target.closest('.idea-footer').querySelector('.quality-text');
-	var targetIdea = getIdeaFromArray(e);
-	targetIdea.updateQuality('downvote');
+function changeQualityText(targetIdea, qualityText) {
 	if (targetIdea.quality === 0) {
 	qualityText.innerText =	"Quality:  " + targetIdea.qualityRating
 	} if (targetIdea.quality === 1) {
@@ -169,12 +153,16 @@ function getIdeaFromArray(e) {
 	return targetIdea;
 }
 
-function searchFilter() {
+function handleSearch() {
+	outputField.innerHTML = '';
+  var searchText = document.querySelector('#search-ideas-input').value.toLowerCase();
   if(starredIdeasBtn.innerHTML === 'View All Ideas') {
-    searchStarFilter();
-  } else {
-    outputField.innerHTML = '';
-    var searchText = document.querySelector('#search-ideas-input').value.toLowerCase();
+    searchStarFilter(searchText);
+  } else { 
+  	searchAllFilter(searchText);
+}
+
+function searchAllFilter(searchText) {
     var filteredIdeas = ideaArray.filter(function(idea) {
       return (idea.title.toLowerCase().includes(searchText) || idea.body.toLowerCase().includes(searchText)) 
     });
@@ -184,23 +172,21 @@ function searchFilter() {
   }
 };
 
-function searchStarFilter() {
-  outputField.innerHTML = '';
-  var searchText = document.querySelector('#search-ideas-input').value.toLowerCase();
+function searchStarFilter(searchText) {
   var filteredIdeas = ideaArray.filter(function(idea) {
-    return (idea.title.toLowerCase().includes(searchText) && idea.star === true || idea.body.toLowerCase().includes(searchText) && idea.star === true) 
+    return (idea.title.toLowerCase().includes(searchText) && idea.star === true || idea.body.toLowerCase().includes(searchText) && idea.star === true)
   });
   filteredIdeas.forEach(function(idea) {
     displayIdeaCard(idea);
   })
-}
+};
 
 function showStarredIdeas() {
   if (starredIdeasBtn.innerHTML === 'Show Starred Ideas') {
     outputField.innerHTML = '';
     var filteredStarIdeas = ideaArray.filter(function(idea) {
       return idea.star === true;
-    }); 
+    });
     filteredStarIdeas.forEach(function(idea) {
       displayIdeaCard(idea);
     })
