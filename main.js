@@ -97,7 +97,7 @@ function handleCardEdit(e) {
 };
 
 function focusOutEvent(e) {
-	 	var title = e.target.closest('.idea-article').querySelector('#idea-title').innerText;
+	var title = e.target.closest('.idea-article').querySelector('#idea-title').innerText;
   	var body = e.target.closest('.idea-article').querySelector('#idea-body').innerText;
     e.target.blur();
     var ideaId = e.target.closest('.idea-box').getAttribute('data-id');
@@ -141,3 +141,11 @@ function findIdea(id) {
 		return idea.data == id;
 	})
 };
+
+function classToggle(x) {
+  	const navs = document.querySelectorAll('.Navbar__Items')
+  	navs.forEach(nav => nav.classList.toggle('Navbar__ToggleShow'));
+  	x.classList.toggle("change");
+}
+document.querySelector('.Navbar__Link-toggle')
+  .addEventListener('click', classToggle);
