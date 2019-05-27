@@ -12,13 +12,12 @@ class Idea {
 		localStorage.setItem('ideaArray',JSON.stringify(ideaArray));
 	}
 
-	removeIdea(ideaId){
+	removeIdea(targetIdea){
 		var updatedArray = ideaArray.filter(function(arrayItem){
-			if(arrayItem.data !== parseInt(ideaId)) {
+			if(arrayItem.data !== targetIdea.data) {
 				return arrayItem
 			}
 		})
-
 		ideaArray = updatedArray;
 		this.storeIdea(ideaArray);
 	}

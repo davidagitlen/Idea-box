@@ -12,8 +12,8 @@ var ideaCard = document.querySelector('.idea-box');
 window.addEventListener('load', refillArray);
 window.addEventListener('load', repopulateIdeaCards);
 saveBtn.addEventListener('click', handleSubmit);
-titleInput.addEventListener('keyup', enableSaveBtn);
-bodyInput.addEventListener('keyup', enableSaveBtn);
+titleInput.addEventListener('keyup', handleSaveBtn);
+bodyInput.addEventListener('keyup', handleSaveBtn);
 searchInput.addEventListener('keyup', searchFilter);
 outputField.addEventListener('keydown', handleCardEdit);
 outputField.addEventListener('focusout', focusOutEvent);
@@ -55,9 +55,8 @@ function createIdea() {
 	titleInput.value = "";
 	bodyInput.value = "";
 	displayIdeaCard(idea);
-	disableSaveBtn();
+	handleSaveBtn();
 };
-
 
 function displayIdeaCard({title, body, data, star, quality, qualityRating}) {
 	var starSrc = star ? 'star-active.svg' : 'star.svg';
@@ -90,42 +89,36 @@ function handleCardEdit(e) {
   	var title = e.target.closest('.idea-article').querySelector('#idea-title').innerText;
   	var body = e.target.closest('.idea-article').querySelector('#idea-body').innerText;
     e.target.blur();
-    var ideaId = e.target.closest('.idea-box').getAttribute('data-id');
-    var ideaToUpdate = findIdea(ideaId);
-    ideaToUpdate.updateIdea(title, body);
-    ideaToUpdate.storeIdea(ideaArray);
+    var targetIdea = getIdeaFromArray(e);
+    targetIdea.updateIdea(title, body);
+    targetIdea.storeIdea(ideaArray);
   }
 };
 
 function focusOutEvent(e) {
-	 	var title = e.target.closest('.idea-article').querySelector('#idea-title').innerText;
-  	var body = e.target.closest('.idea-article').querySelector('#idea-body').innerText;
-    var ideaId = e.target.closest('.idea-box').getAttribute('data-id');
-    var ideaToUpdate = findIdea(ideaId);
-    ideaToUpdate.updateIdea(title, body);
-    ideaToUpdate.storeIdea(ideaArray);
+ 	var title = e.target.closest('.idea-article').querySelector('#idea-title').innerText;
+	var body = e.target.closest('.idea-article').querySelector('#idea-body').innerText;
+	var targetIdea = getIdeaFromArray(e);
+  targetIdea.updateIdea(title, body);
+  targetIdea.storeIdea(ideaArray);
 }
 
-function enableSaveBtn() {
+function handleSaveBtn() {
 	if (titleInput.value !== "" || bodyInput.value !== "") {
 		saveBtn.disabled = false;
+	} else {
+		saveBtn.disable = true;
 	}
-};
-
-function disableSaveBtn() {
-	saveBtn.disabled = true;
 };
 
 function deleteCard(e) {
 	e.target.closest('.idea-box').remove();
-	var ideaId = e.target.closest('.idea-box').getAttribute('data-id');
-	var idea = new Idea;
-	idea.removeIdea(ideaId);
+	var targetIdea = getIdeaFromArray(e);
+	targetIdea.removeIdea(targetIdea);
 };
 
 function toggleStar(e) {
-	var ideaId = e.target.closest('.idea-box').getAttribute('data-id');
-	var targetIdea = findIdea(ideaId);
+	var targetIdea = getIdeaFromArray(e);
 	targetIdea.updateStar();
 	if(targetIdea.star) {
 		e.target.setAttribute('src', 'idea-box-icons/star-active.svg');
@@ -137,8 +130,7 @@ function toggleStar(e) {
 
 function toggleUpvote(e) {
 	var qualityText = e.target.closest('.idea-footer').querySelector('.quality-text');
-	var ideaId = e.target.closest('.idea-box').getAttribute('data-id');
-	var targetIdea = findIdea(ideaId);
+	var targetIdea = getIdeaFromArray(e);
 	targetIdea.updateQuality('upvote');
 	if (targetIdea.quality === 0) {
 	qualityText.innerText =	"Quality:  " + targetIdea.qualityRating
@@ -152,8 +144,7 @@ function toggleUpvote(e) {
 
 function toggleDownvote(e) {
 	var qualityText = e.target.closest('.idea-footer').querySelector('.quality-text');
-	var ideaId = e.target.closest('.idea-box').getAttribute('data-id');
-	var targetIdea = findIdea(ideaId);
+	var targetIdea = getIdeaFromArray(e);
 	targetIdea.updateQuality('downvote');
 	if (targetIdea.quality === 0) {
 	qualityText.innerText =	"Quality:  " + targetIdea.qualityRating
@@ -170,6 +161,12 @@ function findIdea(id) {
 		return idea.data == id;
 	})
 };
+
+function getIdeaFromArray(e) {
+	var ideaId = e.target.closest('.idea-box').getAttribute('data-id');
+	var targetIdea = findIdea(ideaId);
+	return targetIdea;
+}
 
 function searchFilter() {
   outputField.innerHTML = '';
