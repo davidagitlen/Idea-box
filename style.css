@@ -14,7 +14,6 @@ body {
 	"sidebar main"
 	"sidebar output"
 	"sidebar output";
-	min-height: 100%;
 }
 
 /*HEADER/ASIDE NAV*/
@@ -22,62 +21,28 @@ body {
 h1 {
 	color: #FFFFFF;
 	font-size: 16px;
-	padding-left: 8px;
-	padding-top: 5px;
-}
-
-.Navbar {
-	background-color: #1F1F3D;
-	cursor: pointer;
-	display: flex;
-	flex-direction: column;
-	flex-wrap: wrap;
-	grid-area: sidebar;
-}
-
-.Navbar__Link, .Navbar__Items {
-	width: 100%;
-}
-
-.Navbar__Link-toggle {
-    display: none;
+	padding: 10px 0px 10px 13px;
 }
 
 h2 {
 	color: #BFBFDD;
 	font-size: 14px;
 	padding-bottom: 10px;
-	padding-left: 8px;
 }
 
 button {
 	border-radius: 1.5px;
 }
 
-hr {
-    border-color: #A9AAD2;
-    font-weight: 100;
-    margin-bottom: 10%;
-    margin-top: 10%;
-    width: 100%;
-}
-
 ul {
-	padding-bottom: 10px;
 	position: relative;
-	right: 32px;
+	right: 40px;
 }
 
 li {
 	color: #FFFFFF;
-	cursor: pointer;
 	list-style: none;
 	margin: 15px 0px 15px 0px;
-}
-
-li:hover{
-    background-color:#d14119;
-    border-left: 4px solid #f58e72;
 }
 
 input {
@@ -102,6 +67,14 @@ output {
 	padding: 20px;
 }
 
+legend {
+	display: none;
+}
+
+fieldset {
+	border: 0;
+}
+
 .sidebar {
 	background-color: #1F1F3D;
 	display: flex;
@@ -110,19 +83,18 @@ output {
 }
 
 .header-section {
+	border-bottom: 1px solid #353567;
+	border-top: 1px solid #353567;
 	margin-bottom: 10px;
-	padding-left: 8px;
-    padding-right: 8px;
+	padding: 0px 13px 10px 13px;
 }
 
 .header-form {
-	/*border-bottom: 1px solid #353567;*/
+	border-bottom: 1px solid #353567;
 }
 
 .new-quality-label {
 	color: #BFBFDD;
-	padding-left: 8px;
-    padding-right: 8px;
 }
 
 .header-button {
@@ -130,13 +102,15 @@ output {
 	border-color: #353567;
 	color: #E9E9F3;
 	height: 2.5em;
-	padding: 0px 8px 0px 8px;
+	margin-bottom: 15px;
 	width: 100%;
 }
 
 .quality-input {
 	height: 2.5em;
-    margin: 10px 8px 15px 8px;
+	margin-bottom: 15px;
+	margin-top: 10px;
+	width: 100%;
 }
 
 /*MAIN*/
@@ -154,14 +128,6 @@ output {
 	grid-area: center;
 	margin: 10px auto 0 auto;
 	width: 100%;
-}
-
-legend {
-	display: none;
-}
-
-fieldset {
-	border: 0;
 }
 
 .main-label {
@@ -275,145 +241,3 @@ fieldset {
 	position: absolute;
 	text-align: center;
 }
-
-/* media query */
-@media screen and (max-width: 425px) {
-  
-  body {
-    display: block;
-  }
-/*HEADER/NAV*/
-  h1 {
-    display: flex;
-    font-size: 24px;
-    justify-content: center;
-  }
-
-  .Navbar {
-  	background-color: #1F1F3D;
-	display: flex;
-	flex-direction: column;
-  }
-
-  .fa-bars:before {
-  	color: white;
-  	padding-right: 2px;
-  }
-
-  /*.change .fa-bars {
-    backgr*/ound-image: url("idea-box-icons/menu-close.svg");
-  }
-
-  .Navbar__Link-toggle {
-    align-items: center;
-    cursor: pointer;
-    display: flex;
-    font-size: 30px;
-    margin-left: 10px;
-    padding: 10px;
-    position: absolute;
-  }
-
-  .Navbar__Items,
-  .Navbar {
-    flex-direction: column;
-  }
-
-  .Navbar__Items {
-    display:none;
-  }
-
-  .Navbar__Items--right {
-    margin-left:0;
-  }
-
-  .Navbar__ToggleShow {
-    color: white;
-    display: flex;
-  }
-
-  .header-form, legend, hr {
-    display: none;
-  }
-  
-  h2 {
-	color: #BFBFDD;
-	font-size: 14px;
-	padding-bottom: 10px;
-  }
-
-  ul {
-    margin-left: 8px;
-  }
-
-  header {
-    height: auto;
-  }
-
-  button {
-	border-radius: 1.5px;
-  }
-
-  ul {
-	position: relative;
-	right: 40px;
-  }
-
-  li {
-	color: #FFFFFF;
-	cursor: pointer;
-	list-style: none;
-	margin: 15px 0px 15px 0px;
-  }
-
-  li:hover{
-    background-color:#d14119;
-    border-left: 4px solid #f58e72;
-  }  
-    
-  .header-button {
-	background-color: #5356A4;
-	border-color: #353567;
-	color: #E9E9F3;
-	display: flex;
-	height: 2.5em;
-	margin-bottom: 15px;
-	width: 90%;
-    justify-content: center;
-  }
-
-  .quality-input {
-	height: 2.5em;
-	margin-bottom: 15px;
-	margin-top: 10px;
-	width: 90%;
-  }	
-  
-  .sub-head {
-    display: flex;
-  }
-
-  .new-quality-label {
-	color: #BFBFDD;
-  }
-/*MAIN*/
-
-  .main-form {
-    display: flex;
-  }	  
-
-
-/*CARD*/
-   output {
-   	display: flex;
-   	flex-direction: column;
-	}
-
-  .idea-box {
-	border: 1px solid #6E646B;
-	display: flex;
-	flex-direction: column;
-	height: 200px;
-	justify-self: center;
-	margin-bottom: 10px;
-	width: 100%;
