@@ -18,6 +18,7 @@ searchInput.addEventListener('keyup', searchFilter);
 outputField.addEventListener('keydown', handleCardEdit);
 outputField.addEventListener('focusout', focusOutEvent);
 outputField.addEventListener('click', handleCardButtons);
+document.querySelector('.Navbar__Link-toggle').addEventListener('click', classToggle);
 
 function handleCardButtons(e) {
  if (e.target.classList.contains('delete-button')) {
@@ -98,7 +99,7 @@ function handleCardEdit(e) {
 };
 
 function focusOutEvent(e) {
-	 	var title = e.target.closest('.idea-article').querySelector('#idea-title').innerText;
+	var title = e.target.closest('.idea-article').querySelector('#idea-title').innerText;
   	var body = e.target.closest('.idea-article').querySelector('#idea-body').innerText;
     var ideaId = e.target.closest('.idea-box').getAttribute('data-id');
     var ideaToUpdate = findIdea(ideaId);
@@ -170,6 +171,11 @@ function findIdea(id) {
 		return idea.data == id;
 	})
 };
+
+function classToggle() {
+  	const navs = document.querySelectorAll('.Navbar__Items')
+  	navs.forEach(nav => nav.classList.toggle('Navbar__ToggleShow'));
+}
 
 function searchFilter() {
   outputField.innerHTML = '';

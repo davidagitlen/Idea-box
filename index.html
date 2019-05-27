@@ -4,30 +4,49 @@
 	<link href="normalize.css" type="text/css" rel="stylesheet">
 	<link href="style.css" type="text/css" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link href="https://fonts.googleapis.com/css?family=Indie+Flower&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
 	<title>Idea Box</title>
 </head>
 <body>
+	<div class="Navbar">
 	<header class="sidebar">
-		<h1 class="main-head">IdeaBox Redux</h1>
+	  <div class="Navbar__Link Navbar__Link-brand"></div> 
+			<h1 class="main-head">IdeaBox Redux</h1>
+		<div class="Navbar__Link Navbar__Link-toggle">
+       	  	<i class="fas fa-bars"></i>
+      	</div>
+      <nav class="Navbar__Items">
+        <div class="Navbar__Link">
+        	<hr/>
 		<section class="header-section">
-			<h2 class="sub-head">Filter Starred Ideas</h2>
-			<button class="header-button" id="starred-ideas-button" type="button">Show Starred Ideas</button>
+				<h2 class="sub-head">Filter Starred Ideas</h2>
+				<button class="header-button" id="starred-ideas-button" type="button">Show Starred Ideas</button>
 		</section>
+	    </div>
+	    <div class="Navbar__Link">
 		<form class="header-form">
-			<fieldset>
-				<legend>Filter by Quality</legend>
+			<hr/>
+		</div>	
+		<div class="Navbar__Link">	
 				<h2 class="sub-head">Filter by Quality</h2>
 				<ul class="quality-list">
 					<li>Swill</li>
 					<li>Plausible</li>
 					<li>Genius</li>
 				</ul>
-				<label class="new-quality-label" for="quality-input">New Quality<input class= "quality-input" id="quality-input" type="text"></label>
+		</div>
+      	<div class="Navbar__Link">		
+				<label class="new-quality-label" for="quality-input">New Quality<input class= "quality-input" id="quality-input" type="text"></label><BR>
 				<button class="header-button" id="add-quality-button" type="button">Add New Quality</button>
-			</fieldset>
+			<hr/>
 		</form>
+		</div>
+      </nav>
 	</header>
+	</div>
 	<main>
 		<form class="main-form">
 			<fieldset class="main-fieldset">
