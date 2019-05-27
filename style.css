@@ -9,7 +9,6 @@ body {
 	font-family: Open Sans, sans-serif;
 	font-weight: 300;
 	grid-template-columns: 1fr 5fr;
-	grid-template-rows: 2fr 4fr;
 	grid-template-areas:
 	"sidebar main"
 	"sidebar output"
@@ -54,6 +53,7 @@ input {
 main {
 	background-color: #A9AAD2;
 	grid-area: main;
+	height: initial;
 }
 
 output {
