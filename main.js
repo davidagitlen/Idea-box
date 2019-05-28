@@ -90,11 +90,13 @@ function handleCardEdit(e) {
 };
 
 function focusOutEvent(e) {
+	if (e.target.className === 'idea-article-body' || e.target.className === 'idea-article-title'){
  	var title = e.target.closest('.idea-article').querySelector('#idea-title').innerText;
 	var body = e.target.closest('.idea-article').querySelector('#idea-body').innerText;
 	var targetIdea = getIdeaFromArray(e);
   targetIdea.updateIdea(title, body);
   targetIdea.storeIdea(ideaArray);
+	}
 }
 
 function handleSaveBtn() {
