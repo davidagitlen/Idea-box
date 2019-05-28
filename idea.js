@@ -15,7 +15,7 @@ class Idea {
 	removeIdea(targetIdea){
 		var updatedArray = ideaArray.filter(function(arrayItem){
 			if(arrayItem.data !== targetIdea.data) {
-				return arrayItem
+				return arrayItem;
 			}
 		})
 		ideaArray = updatedArray;
@@ -42,5 +42,4 @@ class Idea {
 		}
 		this.qualityRating = qualityArray[this.quality];
 		}
-
-};
+}
