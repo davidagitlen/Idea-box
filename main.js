@@ -1,4 +1,5 @@
 var ideaArray = [];
+var qualityRating = ['Swill', 'Plausible', 'Genius'];
 var starredIdeasBtn = document.getElementById('starred-ideas-button');
 var newQualityInput = document.getElementById('quality-input');
 var addQualityBtn = document.getElementById('add-quality-button');
@@ -11,7 +12,7 @@ var ideaCard = document.querySelector('.idea-box');
 
 window.addEventListener('load', refillArray);
 window.addEventListener('load', repopulateIdeaCards);
-starredIdeasBtn.addEventListener('click', showStarredIdeas)
+starredIdeasBtn.addEventListener('click', handleStarButton)
 saveBtn.addEventListener('click', createIdea);
 titleInput.addEventListener('keyup', handleSaveBtn);
 bodyInput.addEventListener('keyup', handleSaveBtn);
@@ -47,7 +48,7 @@ function createIdea() {
 	handleSaveBtn();
 };
 
-function displayIdeaCard({title, body, data, star, quality, qualityRating}) {
+function displayIdeaCard({title, body, data, star, quality}) {
 	var starSrc = star ? 'star-active.svg' : 'star.svg';
 	outputField.insertAdjacentHTML('afterbegin', 	
 		`<section class="idea-box" data-id=${data}>
@@ -181,9 +182,17 @@ function searchStarFilter(searchText) {
   })
 };
 
+function handleStarButton() {
+	outputField.innerHTML = '';
+	if (starredIdeasBtn.innerHTML === 'Show Starred Ideas') {
+		showStarredIdeas();
+	} else {
+		repopulateIdeaCards();
+		starredIdeasBtn.innerHTML = 'Show Starred Ideas'
+	}
+}
+
 function showStarredIdeas() {
-  if (starredIdeasBtn.innerHTML === 'Show Starred Ideas') {
-    outputField.innerHTML = '';
     var filteredStarIdeas = ideaArray.filter(function(idea) {
       return idea.star === true;
     });
@@ -191,9 +200,4 @@ function showStarredIdeas() {
       displayIdeaCard(idea);
     })
     starredIdeasBtn.innerHTML = 'View All Ideas';
-  } else {
-    outputField.innerHTML = '';
-    repopulateIdeaCards();   
-    starredIdeasBtn.innerHTML = 'Show Starred Ideas'
-  }
 };
