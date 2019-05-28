@@ -9,6 +9,9 @@ var saveBtn = document.getElementById('save-button');
 var searchInput = document.getElementById('search-ideas-input');
 var outputField = document.getElementById('output-field');
 var ideaCard = document.querySelector('.idea-box'); 
+var navToggle = document.querySelector('.Navbar__Link-toggle');
+var mainOpacity = document.getElementById('main');
+ 
 
 window.addEventListener('load', refillArray);
 window.addEventListener('load', repopulateIdeaCards);
@@ -20,6 +23,9 @@ searchInput.addEventListener('keyup', handleSearch);
 outputField.addEventListener('keydown', handleCardEdit);
 outputField.addEventListener('focusout', focusOutEvent);
 outputField.addEventListener('click', handleCardButtons);
+outputField.addEventListener('click', classToggle);
+navToggle.addEventListener('click', classToggle);
+mainOpacity.addEventListener('click', classToggle);
 
 function handleCardButtons(e) {
   deleteCard(e);
@@ -190,7 +196,6 @@ function handleStarButton() {
 		repopulateIdeaCards();
 		starredIdeasBtn.innerHTML = 'Show Starred Ideas'
 	}
-}
 
 function showStarredIdeas() {
     var filteredStarIdeas = ideaArray.filter(function(idea) {
@@ -201,3 +206,10 @@ function showStarredIdeas() {
     })
     starredIdeasBtn.innerHTML = 'View All Ideas';
 };
+  
+function classToggle() {
+    const navs = document.querySelectorAll('.Navbar__Items')
+  	navs.forEach(nav => nav.classList.toggle('Navbar__ToggleShow'));
+  	outputField.classList.toggle('change');
+  	mainOpacity.classList.toggle('change');
+}
