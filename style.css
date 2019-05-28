@@ -43,7 +43,7 @@ ul {
 
 li {
 	color: #FFFFFF;
-	font-size: 20px;
+	font-size: 16px;
 	list-style: none;
 	margin: 15px 0px 15px 0px;
 }
@@ -59,7 +59,7 @@ input {
 	border-width: .5px;
 }
 
-#main {
+main {
 	background-color: #A9AAD2;
 	grid-area: main;
 }
@@ -69,7 +69,6 @@ output {
 	height: 100%;
 	display: grid;
 	grid-area: output;
-	grid-gap: 10px;
 	grid-template-columns: 1fr 1fr 1fr;
 	grid-template-rows: 1fr 1fr;
 	padding: 20px;
@@ -88,13 +87,13 @@ fieldset {
 	display: flex;
 	flex-direction: column;
 	grid-area: sidebar;
+	min-width: 175px;
 }
 
 .header-section {
-	border-bottom: 1px solid #353567;
 	border-top: 1px solid #353567;
 	margin-bottom: 10px;
-	padding: 0px 13px 10px 13px;
+	padding: 0px 13px 0px 13px;
 }
 
 .header-form {
@@ -113,6 +112,8 @@ fieldset {
 	height: 2.5em;
 	margin-bottom: 15px;
 	width: 100%;
+	font-size: 12px;
+	font-weight: 700;
 }
 
 .quality-input {
@@ -130,8 +131,8 @@ fieldset {
 
 .main-form {
 	display: grid;
-	grid-template-columns: 1fr 2fr 1fr;
-	grid-template-areas:
+/*	grid-template-columns: 1fr 2fr 1fr;
+*/	grid-template-areas:
 	"left center right";
 }
 
@@ -140,7 +141,7 @@ fieldset {
 	flex-direction: column;
 	grid-area: center;
 	margin: 10px auto 0 auto;
-	width: 100%;
+	width: 95%;
 }
 
 .main-label {
@@ -199,7 +200,7 @@ fieldset {
 	border: 1px solid #6E646B;
 	display: flex;
 	flex-direction: column;
-	height: 350px;
+	height: 300px;
 	justify-self: center;
 	width: 85%;
 }
@@ -249,7 +250,8 @@ fieldset {
 
 .quality-text {
 	color: #FFFFFF;
-	font-weight: 600;
+	font-weight: 700;
+	font-size: 12px;
 }
 
 .upvote-button, .downvote-button {
@@ -266,7 +268,7 @@ fieldset {
 }
 
 /* -------media query-------- */
-@media screen and (min-width: 300px) and (max-width: 425px) {
+@media screen and (max-width: 500px) {
   
   body {
     display: block;
