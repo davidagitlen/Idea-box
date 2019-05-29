@@ -10,38 +10,35 @@
 </head>
 <body>
 	<header class="sidebar">
-	<div class="Navbar">
-	    <div class="Navbar__Link Navbar__Link-brand"></div>
-		<h1 class="main-head">IdeaBox Redux</h1>
-		<div class="Navbar__Link Navbar__Link-toggle">
-    	<i class="fas fa-bars"></i>
-    </div>
-      <nav class="Navbar__Items">
-      <div class="Navbar__Link">
-		<section class="header-section">
-			<h2 class="sub-head">Filter Starred Ideas</h2>
-			<button class="header-button" id="starred-ideas-button" type="button">Show Starred Ideas</button>
-		</section>
-		</div>
-		<div class="Navbar__Link">
-		<form class="header-form">
-		</div>	
-			<fieldset>
-				<legend>Filter by Quality</legend>
-				<div class="Navbar__Link">
-				<h2 class="sub-head">Filter by Quality</h2>
-				<ul class="quality-list">
-					<li id="swill-li" class="swill-li">Swill</li>
-					<li id="plausible-li" class="plausible-li">Plausible</li>
-					<li id="genius-li" class="genius-li">Genius</li>
-				</ul>
-				</div>
-				<div class="Navbar__Link">
-				<label class="new-quality-label" for="quality-input">New Quality<input class= "quality-input" id="quality-input" type="text"></label>
-				<button class="header-button" id="add-quality-button" type="button">Add New Quality</button>
-				</div>
-			</fieldset>
-		</form>
+		<div class="Navbar">
+ 			<h1 class="main-head">IdeaBox Redux</h1>
+				<div class="Navbar__Link-toggle">
+    			<i class="fas fa-bars"></i>
+    		</div>
+      	<nav class="Navbar__Items">
+      		<div class="Navbar__Link">
+						<section class="header-section">
+							<h2 class="sub-head">Filter Starred Ideas</h2>
+							<button class="header-button" id="starred-ideas-button" type="button">Show Starred Ideas</button>
+						</section>
+					</div>
+					<form class="header-form">
+						<fieldset id="nav__fieldset">
+							<legend>Filter by Quality</legend>
+							<div class="Navbar__Link">
+								<h2 class="sub-head">Filter by Quality</h2>
+								<ul class="quality-list">
+									<li>Swill</li>
+									<li>Plausible</li>
+									<li>Genius</li>
+								</ul>
+							</div>
+							<div class="Navbar__Link">
+								<label class="new-quality-label" for="quality-input">New Quality<input class= "quality-input" id="quality-input" type="text"></label>
+								<button class="header-button" id="add-quality-button" type="button">Add New Quality</button>
+							</div>
+						</fieldset>
+					</form>
 	</header>
 	<main id="main">
 		<form class="main-form">
@@ -51,7 +48,10 @@
 				<label class= "main-label" for="body-input">Body</label>
 				<textarea class="body-input" id="body-input" rows="5" cols="33"></textarea>
 				<button class="save-button" id="save-button" type="button" disabled>Save</button>
-				<div class="search-items"><img class="search-icon" src="idea-box-icons/search.svg"/><input class="search-ideas-input" id="search-ideas-input" type="search" placeholder="Search ideas"></div>
+				<div class="search-items">
+					<img class="search-icon" src="idea-box-icons/search.svg"/>
+					<input class="search-ideas-input" id="search-ideas-input" type="search" placeholder="Search ideas">
+				</div>
 			<fieldset>
 		</form>
 	</main>
