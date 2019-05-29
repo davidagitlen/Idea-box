@@ -265,14 +265,6 @@ fieldset {
 	width: 30px;
 }
 
-.upvote-button:hover:enabled {
-  background-color: #1F1F3D;
-}
-
-.downvote-button:hover:enabled {
-  background-color: #1F1F3D;
-}
-
 .no-idea-yet-text {
 	display: none;
 	font-family: 'Indie Flower', cursive;
