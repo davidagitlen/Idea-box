@@ -10,55 +10,57 @@
 </head>
 <body>
 	<header class="sidebar">
-		<div class="Navbar">
- 			<h1 class="main-head">IdeaBox Redux</h1>
-				<div class="Navbar__Link-toggle">
-    			<i class="fas fa-bars"></i>
-    		</div>
-      	<nav class="Navbar__Items">
-      		<div class="Navbar__Link">
-						<section class="header-section">
-							<h2 class="sub-head">Filter Starred Ideas</h2>
-							<button class="header-button" id="starred-ideas-button" type="button">Show Starred Ideas</button>
+		<h1 class="main-head">IdeaBox Redux</h1>
+			<div class="Navbar__Link-toggle">
+    		<i class="fas fa-bars"></i>
+    	</div>
+      <nav class="Navbar__Items">
+      	<section class="Navbar__Link">
+					<section class="header-section">
+						<h2 class="sub-head">Filter Starred Ideas</h2>
+						<button class="header-button" id="starred-ideas-button" type="button">Show Starred Ideas</button>
+					</section>
+				</section>
+				<form class="header-form">
+					<fieldset id="nav__fieldset">
+						<legend>Filter by Quality</legend>
+						<section class="Navbar__Link">
+							<h2 class="sub-head">Filter by Quality</h2>
+							<ul class="quality-list">
+								<li id="swill-li" class="swill-li">Swill</li>
+								<li id="plausible-li" class="plausible-li">Plausible</li>
+                <li id="genius-li" class="genius-li">Genius</li>
+							</ul>
 						</section>
-					</div>
-					<form class="header-form">
-						<fieldset id="nav__fieldset">
-							<legend>Filter by Quality</legend>
-							<div class="Navbar__Link">
-								<h2 class="sub-head">Filter by Quality</h2>
-								<ul class="quality-list">
-									<li id="swill-li" class="swill-li">Swill</li>
-									<li id="plausible-li" class="plausible-li">Plausible</li>
-                  <li id="genius-li" class="genius-li">Genius</li>
-								</ul>
-							</div>
-							<div class="Navbar__Link">
-								<label class="new-quality-label" for="quality-input">New Quality<input class= "quality-input" id="quality-input" type="text"></label>
-								<button class="header-button" id="add-quality-button" type="button">Add New Quality</button>
-							</div>
-						</fieldset>
-					</form>
+						<section class="Navbar__Link">
+							<label class="new-quality-label" for="quality-input">New Quality<input class= "quality-input" id="quality-input" type="text"></label>
+							<button class="header-button" id="add-quality-button" type="button">Add New Quality</button>
+						</section>
+					</fieldset>
+				</form>
 	</header>
 	<main id="main">
 		<form class="main-form">
 			<fieldset class="main-fieldset">
 				<legend>Main Idea Input</legend>
-				<label class="main-label" for="title-input">Title</label><input class="title-input" id="title-input" type="text">
+				<label class="main-label" for="title-input">Title</label>
+				<input class="title-input" id="title-input" type="text">
 				<label class= "main-label" for="body-input">Body</label>
 				<textarea class="body-input" id="body-input" rows="5" cols="33"></textarea>
 				<button class="save-button" id="save-button" type="button" disabled>Save</button>
-				<div class="search-items">
+				<section class="search-items">
 					<img class="search-icon" src="idea-box-icons/search.svg"/>
 					<input class="search-ideas-input" id="search-ideas-input" type="search" placeholder="Search ideas">
-				</div>
+				</section>
 				<button class="ten-ideas-button" id="ten-ideas-button">Show Less</button>
 			<fieldset>
 		</form>
 	</main>
 	<output id="output-field">
-		<p class="no-idea-yet-text">Are you still thinking?</p>
+		<p class="no-idea-yet-text">Are you still thinking? Start by entering in a title and body!</p>
+		<p class="no-starred-idea-yet no-starred-idea-yet2">Please star some ideas!</p>
 	</output>
+	</nav>
 </body>
 <script src="idea.js" type="text/javascript"></script>
 <script src="main.js" type="text/javascript"></script>
