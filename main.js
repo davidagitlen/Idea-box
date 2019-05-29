@@ -11,6 +11,7 @@ var outputField = document.getElementById('output-field');
 var ideaCard = document.querySelector('.idea-box'); 
 var navToggle = document.querySelector('.Navbar__Link-toggle');
 var mainOpacity = document.getElementById('main');
+var ideaPlaceholder = document.querySelector(".no-idea-yet-text");
  
 
 window.addEventListener('load', refillArray);
@@ -54,6 +55,7 @@ function createIdea() {
 
 function displayIdeaCard({title, body, data, star, quality}) {
 	var starSrc = star ? 'star-active.svg' : 'star.svg';
+	ideaPlaceholder.classList.add("hidden");
 	outputField.insertAdjacentHTML('afterbegin', 	
 		`<section class="idea-box" data-id=${data}>
 			<header class="idea-header">
