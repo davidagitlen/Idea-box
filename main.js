@@ -14,6 +14,7 @@ var mainOpacity = document.getElementById('main');
 var swillListItem = document.getElementById('swill-li');
 var plausibleListItem = document.getElementById('plausible-li');
 var geniusListItem = document.getElementById('genius-li');
+var tenIdeasBtn = document.getElementById('ten-ideas-button');
 
 window.addEventListener('load', refillArray);
 window.addEventListener('load', repopulateIdeaCards);
@@ -29,6 +30,7 @@ navToggle.addEventListener('click', classToggle);
 swillListItem.addEventListener('click', handleQualityButtons);
 plausibleListItem.addEventListener('click', handleQualityButtons);
 geniusListItem.addEventListener('click', handleQualityButtons);
+tenIdeasBtn.addEventListener('click', toggleTenIdeas);
 
 function handleCardButtons(e) {
   deleteCard(e);
@@ -72,8 +74,8 @@ function displayIdeaCard({title, body, data, star, quality}) {
 				<input type="image" src="idea-box-icons/delete.svg" class="delete-button">
 			</header>
 			<article class="idea-article">
-				<p class="idea-article-title" id="idea-title" contenteditable="true">${title}<p>
-				<p class="idea-article-body" id="idea-body" contenteditable="true">${body}</p>
+				<p class="idea-article-title" contenteditable="true">${title}<p>
+				<p class="idea-article-body" contenteditable="true">${body}</p>
 			</article>
 			<footer class="idea-footer">
 				<input type="image" class="upvote-button" src="idea-box-icons/upvote.svg">
@@ -91,8 +93,8 @@ function repopulateIdeaCards() {
 
 function handleCardEdit(e) {
   if (e.keyCode === 13) {
-  	var title = e.target.closest('.idea-article').querySelector('#idea-title').innerText;
-  	var body = e.target.closest('.idea-article').querySelector('#idea-body').innerText;
+  	var title = e.target.closest('.idea-article').querySelector('.idea-article-title').innerText;
+  	var body = e.target.closest('.idea-article').querySelector('.idea-article-body').innerText;
     e.target.blur();
     var targetIdea = getIdeaFromArray(e);
     targetIdea.updateIdea(title, body);
@@ -102,20 +104,16 @@ function handleCardEdit(e) {
 
 function focusOutEvent(e) {
 	if (e.target.className === 'idea-article-body' || e.target.className === 'idea-article-title'){
- 	var title = e.target.closest('.idea-article').querySelector('#idea-title').innerText;
-	var body = e.target.closest('.idea-article').querySelector('#idea-body').innerText;
-	var targetIdea = getIdeaFromArray(e);
-  targetIdea.updateIdea(title, body);
-  targetIdea.storeIdea(ideaArray);
+	 	var title = e.target.closest('.idea-article').querySelector('.idea-article-title').innerText;
+		var body = e.target.closest('.idea-article').querySelector('.idea-article-body').innerText;
+		var targetIdea = getIdeaFromArray(e);
+	  targetIdea.updateIdea(title, body);
+	  targetIdea.storeIdea(ideaArray);
 	}
 }
 
 function handleSaveBtn() {
-	if (titleInput.value !== "" || bodyInput.value !== "") {
-		saveBtn.disabled = false;
-	} else {
-		saveBtn.disabled = true;
-	}
+	saveBtn.disabled = !titleInput.value || !bodyInput.value;
 };
 
 function deleteCard(e) {
@@ -129,12 +127,14 @@ function deleteCard(e) {
 function toggleStar(e) {
 	if (e.target.classList.contains('star-button')){
 	var targetIdea = getIdeaFromArray(e);
-	targetIdea.updateStar();
-	if(targetIdea.star) {
-		e.target.setAttribute('src', 'idea-box-icons/star-active.svg');
-	} else {
-		e.target.setAttribute('src', 'idea-box-icons/star.svg');
-	}
+	targetIdea.updateStar(); 
+	var starAsset = targetIdea.star ? 'idea-box-icons/star-active.svg' : 'idea-box-icons/star.svg'
+	e.target.setAttribute('src', starAsset)
+	// if(targetIdea.star) {
+	// 	e.target.setAttribute('src', 'idea-box-icons/star-active.svg');
+	// } else {
+	// 	e.target.setAttribute('src', 'idea-box-icons/star.svg');
+	// }
 	targetIdea.storeIdea(ideaArray);
 	}
 };
@@ -161,13 +161,13 @@ function searchByQuality(e, qualityIndex, location) {
 }
 
 function changeQualityText(targetIdea, qualityText) {
-	if (targetIdea.quality === 0) {
-	qualityText.innerText =	"Quality:  " + targetIdea.qualityRating
-	} if (targetIdea.quality === 1) {
-	qualityText.innerText = "Quality:  " + targetIdea.qualityRating
-	} if (targetIdea.quality === 2) {
-	qualityText.innerText = "Quality:  " + targetIdea.qualityRating
-	}
+	// if (targetIdea.quality === 0) {
+	// qualityText.innerText =	"Quality:  " + targetIdea.qualityRating
+	// } if (targetIdea.quality === 1) {
+	// qualityText.innerText = "Quality:  " + targetIdea.qualityRating
+	// } if (targetIdea.quality === 2) {
+	qualityText.innerText = "Quality:  " + targetIdea.qualityRating;
+	// }
 	targetIdea.storeIdea(ideaArray);
 }
 
@@ -239,3 +239,18 @@ function classToggle(e) {
   outputField.classList.toggle('change');
   mainOpacity.classList.toggle('change');
 };
+
+function toggleTenIdeas(e) {
+	if (tenIdeasBtn.innerHTML === "Show Less") {
+	outputField.innerHTML = '';
+	var tenIdeas = ideaArray.slice(0,10);
+	tenIdeas.forEach(function(idea){
+		displayIdeaCard(idea);})
+	tenIdeasBtn.innerHTML === "Show More"
+	// } else if (tenIdeasBtn.innerHTML === "Show More"){
+	// 	ideaArray.forEach(function(idea){
+	// 		displayIdeaCard(idea);
+	// 	})
+	// }
+}
+}
