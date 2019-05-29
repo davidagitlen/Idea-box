@@ -43,7 +43,7 @@ ul {
 
 li {
 	color: #FFFFFF;
-	font-size: 16px;
+	font-size: 14px;
 	list-style: none;
 	padding: 8px 0px;
 	width: 137%;
@@ -266,11 +266,11 @@ fieldset {
 }
 
 .upvote-button:hover:enabled {
-  color: #1F1F3D;
+  background-color: #1F1F3D;
 }
 
 .downvote-button:hover:enabled {
-  color: #1F1F3D;
+  background-color: #1F1F3D;
 }
 
 .no-idea-yet-text {
@@ -307,7 +307,6 @@ fieldset {
 
   h1 {
     display: flex;
-    font-size: 18px;
     justify-content: center;
     padding: 3px;
   }
@@ -322,7 +321,7 @@ fieldset {
   }
 
   .Navbar__Link-toggle {
-    cursor: pointer;
+    /*cursor: pointer;*/
     display: flex;
     font-size: 30px;
     margin-left: 10px;
@@ -348,42 +347,38 @@ fieldset {
   }
 
   .header-form, .header-section, legend {
-    border: none;
+    border-top: none;
   }
   
-  h2 {
+/*  h2 {
 	  font-size: 12px;
 	  padding-bottom: 10px;
-  }
+  }*/
 
   ul {
     margin-left: 8px;
     padding-bottom: 10px;
   }
 
-  li {
+/*  li {
 	  font-size: 20px;
-  }
+  }*/
 
   .header-button {
 	  display: flex;
-	  width: 90%;
+	  width: 100%;
     justify-content: center;
     font-size: 14px;
   }
 
   .quality-input {
 	  height: 37px;
-	  width: 90%;
-  }	
-  
-/*  .new-quality-label {
-    font-weight: 700;
-  }*/
-
-  .sub-head {
-    display: flex;
+	  width: 100%;
   }
+
+/*  .sub-head {
+    display: flex;
+  }*/
 
   .main-form {
     display: flex;
