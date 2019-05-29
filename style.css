@@ -9,10 +9,11 @@ body {
 	font-family: Open Sans, sans-serif;
 	font-weight: 300;
 	grid-template-columns: 1fr 5fr;
+	grid-template-rows: 2fr 5fr;
 	grid-template-areas:
 	"sidebar main"
 	"sidebar output"
-	"sidebar output";
+	/*"sidebar output"*/;
 	height: 100vh;
 }
 
@@ -21,13 +22,12 @@ body {
 h1 {
 	color: #BFBFDD;
   font-size: 18px;
-	padding: 10px 0px 10px 13px;
+	padding: 7px 0px 7px 13px;
 }
 
 h2 {
 	color: #BFBFDD;
-	font-size: 14px;
-	padding-bottom: 10px;
+	font-size: 12px;
 }
 
 button {
@@ -45,7 +45,8 @@ li {
 	color: #FFFFFF;
 	font-size: 16px;
 	list-style: none;
-	margin: 15px 0px 15px 0px;
+	padding: 8px 0px;
+	width: 137%;
 }
 
 li:hover{
@@ -71,6 +72,7 @@ output {
 	grid-area: output;
 	grid-template-columns: 1fr 1fr 1fr;
 	grid-template-rows: 1fr 1fr;
+	grid-gap: 10px;
 	padding: 20px;
 }
 
@@ -80,6 +82,10 @@ legend {
 
 fieldset {
 	border: 0;
+}
+
+.nav-fieldset {
+	border-bottom: 1px solid #353567;
 }
 
 .sidebar {
@@ -92,7 +98,8 @@ fieldset {
 
 .header-section {
 	border-top: 1px solid #353567;
-	margin-bottom: 10px;
+	border-bottom: 1px solid #353567;
+	margin-bottom: 5px;
 	padding: 0px 13px 0px 13px;
 }
 
@@ -102,7 +109,8 @@ fieldset {
 
 .new-quality-label {
 	color: #BFBFDD;
-	font-weight: 500;
+	font-weight: 700;
+	font-size: 12px;
 }
 
 .header-button {
@@ -111,6 +119,7 @@ fieldset {
 	color: #E9E9F3;
 	height: 2.5em;
 	margin-bottom: 15px;
+	margin-top: 10px;
 	width: 100%;
 	font-size: 12px;
 	font-weight: 700;
@@ -119,7 +128,7 @@ fieldset {
 .quality-input {
 	height: 2.5em;
 	margin-bottom: 15px;
-	margin-top: 10px;
+	margin-top: 5px;
 	width: 100%;
 }
 
@@ -131,8 +140,7 @@ fieldset {
 
 .main-form {
 	display: grid;
-/*	grid-template-columns: 1fr 2fr 1fr;
-*/	grid-template-areas:
+	grid-template-areas:
 	"left center right";
 }
 
@@ -140,7 +148,7 @@ fieldset {
 	display: flex;
 	flex-direction: column;
 	grid-area: center;
-	margin: 10px auto 0 auto;
+	margin: 2% 0% 0% 7%;
 	width: 95%;
 }
 
@@ -157,18 +165,16 @@ fieldset {
 
 .body-input {
 	border-radius: 1.5px;
-	height: 6em;
 	margin: 10px 0px 20px 0px;
-	resize: none;
 	width: 90%;
 }
 
 .save-button {
-	background-color: #1f1f3d;
+	background-color: #332d72;
 	border: 0;
 	color: #FFFFFF;
-	height: 3em;
-	margin: 10px 0px 20px 0px;
+	height: 2.5em;
+	margin: 10px 0px 15px 0px;
 	width: 90%;
 }
 
@@ -178,7 +184,7 @@ fieldset {
 }
 
 .search-icon {
-	background-color: #1f1f3d;
+	background-color: #332d72;
 	border-radius: 1.5px;
 	height: 2.5em;
 	margin: 10px 0px 5px 0px;
@@ -202,7 +208,7 @@ fieldset {
 	flex-direction: column;
 	height: 300px;
 	justify-self: center;
-	width: 85%;
+	width: 95%;
 }
 
 .idea-header {
@@ -228,7 +234,7 @@ fieldset {
 
 .idea-article-title {
 	color: #1F1F3D;
-	font-size: 24px;
+	font-size: 18px;
 	font-weight: 600;
 	word-break: break-word;
 } 	 
@@ -236,7 +242,7 @@ fieldset {
 .idea-article-body {
 	word-break: break-word;
   color: #1F1F3D;
-  font-size: 22px;
+  font-size: 16px;
 	font-weight: 500;
 }	
 
@@ -259,6 +265,14 @@ fieldset {
 	width: 30px;
 }
 
+.upvote-button:hover:enabled {
+  color: #1F1F3D;
+}
+
+.downvote-button:hover:enabled {
+  color: #1F1F3D;
+}
+
 .no-idea-yet-text {
 	display: none;
 	font-family: 'Indie Flower', cursive;
@@ -267,7 +281,24 @@ fieldset {
 	text-align: center;
 }
 
-/* -------media query-------- */
+/*MEDIA QUERIES*/
+
+@media screen and (max-width: 740px) {
+
+	output {
+	  display: flex;
+	  flex-direction: column;
+	}
+
+	.idea-box {
+		flex-direction: column;
+		height: 200px;
+		justify-self: center;
+		margin-bottom: 10px;
+		width: 100%;
+	}
+}
+
 @media screen and (max-width: 500px) {
   
   body {
@@ -276,9 +307,9 @@ fieldset {
 
   h1 {
     display: flex;
-    font-size: 24px;
+    font-size: 18px;
     justify-content: center;
-    padding: 0;
+    padding: 3px;
   }
 
   .Navbar {
@@ -321,7 +352,7 @@ fieldset {
   }
   
   h2 {
-	  font-size: 18px;
+	  font-size: 12px;
 	  padding-bottom: 10px;
   }
 
@@ -331,30 +362,24 @@ fieldset {
   }
 
   li {
-	  margin: 15px 0px 15px 0px;
 	  font-size: 20px;
   }
 
   .header-button {
 	  display: flex;
-	  height: 2.5em;
-	  margin-bottom: 15px;
 	  width: 90%;
     justify-content: center;
-    font-size: large;
-    font-weight: bold;
+    font-size: 14px;
   }
 
   .quality-input {
-	  height: 2.5em;
-	  margin-bottom: 15px;
-	  margin-top: 10px;
+	  height: 37px;
 	  width: 90%;
   }	
   
-  .new-quality-label {
-    font-weight: bold;
-  }
+/*  .new-quality-label {
+    font-weight: 700;
+  }*/
 
   .sub-head {
     display: flex;
@@ -368,19 +393,6 @@ fieldset {
    	opacity: 0.2;
   }
 
-  output {
-   	display: flex;
-   	flex-direction: column;
-  }
-
   output.change {
     opacity: 0.2;
-  }
-
-  .idea-box {
-	  flex-direction: column;
-	  height: 200px;
-	  justify-self: center;
-	  margin-bottom: 10px;
-	  width: 100%;
   }
