@@ -179,6 +179,15 @@ fieldset {
 	width: 90%;
 }
 
+.ten-ideas-button{
+	background-color: #332d72;
+	border: 0;
+	color: #FFFFFF;
+	height: 2.5em;
+	margin: 10px 0px 15px 0px;
+	width: 90%;
+}
+
 .search-items {
 	display: flex;
 	flex-direction: row;
