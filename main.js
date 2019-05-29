@@ -172,7 +172,7 @@ function cardButtonHoverOut(e, location, normalButton) {
 function searchByQuality(e, qualityIndex, location) {
 	if (e.target.classList.contains(location)) {	
 		var qualityFilteredIdeas = ideaArray.filter(function(idea) {
-			return (idea.quality === qualityIndex);
+			return idea.quality === qualityIndex;
 		});
 		outputField.innerHTML = '';
 		qualityFilteredIdeas.forEach(function(idea) {
@@ -276,7 +276,9 @@ function handleShowMoreLess(e) {
 } 
 
 function toggleTenIdeas(e) {
-	var tenIdeas = ideaArray.slice(0,10);
+	var begin = ideaArray.length - 10;
+	var end = begin + 11;
+	var tenIdeas = ideaArray.slice(begin, end);
 	tenIdeas.forEach(function(idea){
 		displayIdeaCard(idea)});
 	tenIdeasBtn.innerHTML = "Show More"

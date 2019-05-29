@@ -45,7 +45,7 @@ li {
 	font-size: 14px;
 	list-style: none;
 	padding: 8px 0px;
-	width: 137%;
+	width: 122%;
 }
 
 li:hover{
@@ -217,7 +217,7 @@ fieldset {
 	flex-direction: column;
 	height: 300px;
 	justify-self: center;
-	width: 95%;
+	width: 300px;
 }
 
 .idea-header {
