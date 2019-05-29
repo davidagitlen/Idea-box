@@ -22,7 +22,6 @@ class Idea {
 		this.storeIdea(ideaArray);
 	}
 
-
 	updateIdea(title, body){ 
 		this.title = title;
 		this.body = body;

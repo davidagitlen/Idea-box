@@ -14,6 +14,7 @@ var mainOpacity = document.getElementById('main');
 var swillListItem = document.getElementById('swill-li');
 var plausibleListItem = document.getElementById('plausible-li');
 var geniusListItem = document.getElementById('genius-li');
+var tenIdeasBtn = document.getElementById('ten-ideas-button');
 
 window.addEventListener('load', refillArray);
 window.addEventListener('load', repopulateIdeaCards);
@@ -31,13 +32,14 @@ navToggle.addEventListener('click', classToggle);
 swillListItem.addEventListener('click', handleQualityButtons);
 plausibleListItem.addEventListener('click', handleQualityButtons);
 geniusListItem.addEventListener('click', handleQualityButtons);
+tenIdeasBtn.addEventListener('click', handleShowMoreLess);
 
 function handleCardButtons(e) {
   deleteCard(e);
  	toggleStar(e);
 	toggleVote(e, 'upvote', 'upvote-button');
 	toggleVote(e, 'downvote', 'downvote-button');
-};
+}
 
 function handleQualityButtons(e) {
 	searchByQuality(e, 0, 'swill-li');
@@ -86,8 +88,8 @@ function displayIdeaCard({title, body, data, star, quality}) {
 				<input type="image" src="idea-box-icons/delete.svg" class="delete-button">
 			</header>
 			<article class="idea-article">
-				<p class="idea-article-title" id="idea-title" contenteditable="true">${title}<p>
-				<p class="idea-article-body" id="idea-body" contenteditable="true">${body}</p>
+				<p class="idea-article-title" contenteditable="true">${title}<p>
+				<p class="idea-article-body" contenteditable="true">${body}</p>
 			</article>
 			<footer class="idea-footer">
 				<input type="image" class="upvote-button" src="idea-box-icons/upvote.svg">
@@ -105,8 +107,8 @@ function repopulateIdeaCards() {
 
 function handleCardEdit(e) {
   if (e.keyCode === 13) {
-  	var title = e.target.closest('.idea-article').querySelector('#idea-title').innerText;
-  	var body = e.target.closest('.idea-article').querySelector('#idea-body').innerText;
+  	var title = e.target.closest('.idea-article').querySelector('.idea-article-title').innerText;
+  	var body = e.target.closest('.idea-article').querySelector('.idea-article-body').innerText;
     e.target.blur();
     var targetIdea = getIdeaFromArray(e);
     targetIdea.updateIdea(title, body);
@@ -125,11 +127,7 @@ function focusOutEvent(e) {
 }
 
 function handleSaveBtn() {
-	if (titleInput.value !== "" || bodyInput.value !== "") {
-		saveBtn.disabled = false;
-	} else {
-		saveBtn.disabled = true;
-	}
+	saveBtn.disabled = !titleInput.value || !bodyInput.value;
 }
 
 function deleteCard(e) {
@@ -143,12 +141,9 @@ function deleteCard(e) {
 function toggleStar(e) {
 	if (e.target.classList.contains('star-button')) {
 	var targetIdea = getIdeaFromArray(e);
-	targetIdea.updateStar();
-	if (targetIdea.star) {
-		e.target.setAttribute('src', 'idea-box-icons/star-active.svg');
-	} else {
-		e.target.setAttribute('src', 'idea-box-icons/star.svg');
-	}
+	targetIdea.updateStar(); 
+	var starPath = targetIdea.star ? 'idea-box-icons/star-active.svg' : 'idea-box-icons/star.svg'
+	e.target.setAttribute('src', starPath)
 	targetIdea.storeIdea(ideaArray);
 	}
 }
@@ -187,13 +182,7 @@ function searchByQuality(e, qualityIndex, location) {
 }
 
 function changeQualityText(targetIdea, qualityText) {
-	if (targetIdea.quality === 0) {
-	qualityText.innerText =	"Quality:  " + targetIdea.qualityRating
-	} if (targetIdea.quality === 1) {
-	qualityText.innerText = "Quality:  " + targetIdea.qualityRating
-	} if (targetIdea.quality === 2) {
-	qualityText.innerText = "Quality:  " + targetIdea.qualityRating
-	}
+	qualityText.innerText = "Quality:  " + targetIdea.qualityRating;
 	targetIdea.storeIdea(ideaArray);
 }
 
@@ -214,7 +203,8 @@ function handleSearch() {
   var searchText = document.querySelector('#search-ideas-input').value.toLowerCase();
   if(starredIdeasBtn.innerHTML === 'View All Ideas') {
     searchStarFilter(searchText);
-  } else { 
+  } 
+  else { 
   	searchAllFilter(searchText);
 }
 
@@ -235,6 +225,15 @@ function searchStarFilter(searchText) {
   filteredIdeas.forEach(function(idea) {
     displayIdeaCard(idea);
   });
+}
+
+function searchQualityFilter(searchText, qualityIndex) {
+	var filteredIdeas = ideaArray.filter(function(idea) {
+		return (idea.quality === qualityIndex)
+	});
+	filteredIdeas.forEach(function(idea) {
+		displayIdeaCard(idea);
+	})
 }
 
 function handleStarButton() {
@@ -265,3 +264,27 @@ function classToggle(e) {
   outputField.classList.toggle('change');
   mainOpacity.classList.toggle('change');
 }
+
+function handleShowMoreLess(e) {
+	e.preventDefault();
+	outputField.innerHTML = '';
+	if (tenIdeasBtn.innerHTML === "Show Less") {
+		toggleTenIdeas(e);
+	} else if (tenIdeasBtn.innerHTML === "Show More"){
+		toggleMoreIdeas(e);
+	}
+} 
+
+function toggleTenIdeas(e) {
+	var tenIdeas = ideaArray.slice(0,10);
+	tenIdeas.forEach(function(idea){
+		displayIdeaCard(idea)});
+	tenIdeasBtn.innerHTML = "Show More"
+}
+
+function toggleMoreIdeas(e) {
+	ideaArray.forEach(function(idea){
+		displayIdeaCard(idea);
+	})
+	tenIdeasBtn.innerHTML = "Show Less"
+}	
