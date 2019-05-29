@@ -166,10 +166,20 @@ fieldset {
 .body-input {
 	border-radius: 1.5px;
 	margin: 10px 0px 20px 0px;
+	resize: none;
 	width: 90%;
 }
 
 .save-button {
+	background-color: #332d72;
+	border: 0;
+	color: #FFFFFF;
+	height: 2.5em;
+	margin: 10px 0px 15px 0px;
+	width: 90%;
+}
+
+.ten-ideas-button{
 	background-color: #332d72;
 	border: 0;
 	color: #FFFFFF;
