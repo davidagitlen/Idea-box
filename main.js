@@ -114,7 +114,7 @@ function handleSaveBtn() {
 	if (titleInput.value !== "" || bodyInput.value !== "") {
 		saveBtn.disabled = false;
 	} else {
-		saveBtn.disable = true;
+		saveBtn.disabled = true;
 	}
 };
 
