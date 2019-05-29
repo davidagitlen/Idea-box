@@ -15,6 +15,8 @@ var swillListItem = document.getElementById('swill-li');
 var plausibleListItem = document.getElementById('plausible-li');
 var geniusListItem = document.getElementById('genius-li');
 var tenIdeasBtn = document.getElementById('ten-ideas-button');
+var noIdea = document.querySelector('.no-idea-yet-text');
+var noStarredIdea = document.querySelector('.no-starred-idea-yet');
 
 window.addEventListener('load', refillArray);
 window.addEventListener('load', repopulateIdeaCards);
@@ -62,10 +64,10 @@ function handleHoverOut(e) {
 function refillArray() {
 	if (JSON.parse(localStorage.getItem('ideaArray')) === null) {
 		return;
-	} else {
-	var newArray = JSON.parse(localStorage.getItem('ideaArray')).map(function(array) {
-		return new Idea(array.title, array.body, array.data, array.star, array.quality);
-	});
+  } else {
+  var newArray = JSON.parse(localStorage.getItem('ideaArray')).map(function(array) {
+    return new Idea(array.title, array.body, array.data, array.star, array.quality);
+  });
 	ideaArray = newArray};
 }
 
@@ -80,6 +82,7 @@ function createIdea() {
 }
 
 function displayIdeaCard({title, body, data, star, quality}) {
+  noIdea.classList.add('hidden');
 	var starSrc = star ? 'star-active.svg' : 'star.svg';
 	outputField.insertAdjacentHTML('afterbegin', 	
 		`<section class="idea-box" data-id=${data}>
@@ -136,6 +139,7 @@ function deleteCard(e) {
 	var targetIdea = getIdeaFromArray(e);
 	targetIdea.removeIdea(targetIdea);
 	}
+  placeholder();
 }
 
 function toggleStar(e) {
@@ -237,9 +241,10 @@ function searchQualityFilter(searchText, qualityIndex) {
 }
 
 function handleStarButton() {
-	outputField.innerHTML = '';
+	outputField.innerHTML = `<p class="no-starred-idea-yet no-starred-idea-yet2">Please star some ideas!</p>`;
 	if (starredIdeasBtn.innerHTML === 'Show Starred Ideas') {
 		showStarredIdeas();
+    starPlaceholder();
 	} else {
 		repopulateIdeaCards();
 		starredIdeasBtn.innerHTML = 'Show Starred Ideas';
@@ -288,3 +293,21 @@ function toggleMoreIdeas(e) {
 	})
 	tenIdeasBtn.innerHTML = "Show Less"
 }	
+
+function placeholder() {
+  if (ideaArray.length === 0) {
+    noIdea.classList.remove('hidden');
+  } else if (ideaArray.length !== 0) {
+    noIdea.classList.add('hidden');
+  }
+}
+
+// function starPlaceholder() {
+//   var filteredIdeas = ideaArray.filter(function(idea) {
+//     return (idea.star === true)
+//   });
+//   if (filteredIdeas.length === 0) {
+//     noStarredIdea.classList.remove('no-starred-idea-yet2');
+//     console.log(noStarredIdea.classList)
+//   }
+// }

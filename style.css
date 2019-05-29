@@ -45,7 +45,7 @@ li {
 	font-size: 14px;
 	list-style: none;
 	padding: 8px 0px;
-	width: 137%;
+	width: 122%;
 }
 
 li:hover{
@@ -174,7 +174,7 @@ fieldset {
 	border: 0;
 	color: #FFFFFF;
 	height: 2.5em;
-	margin: 10px 0px 15px 0px;
+	margin: 10px 0px 7px 0px;
 	width: 90%;
 }
 
@@ -217,7 +217,7 @@ fieldset {
 	flex-direction: column;
 	height: 300px;
 	justify-self: center;
-	width: 95%;
+	width: 90%;
 }
 
 .idea-header {
@@ -275,20 +275,43 @@ fieldset {
 }
 
 .no-idea-yet-text {
-	display: none;
 	font-family: 'Indie Flower', cursive;
-	font-size: 72px;
+	font-size: 60px;
+	position: absolute;
+	text-align: center;
+	padding: 0px 30px;
+}
+
+.no-starred-idea-yet {
+	font-family: 'Indie Flower', cursive;
+	font-size: 60px;
 	position: absolute;
 	text-align: center;
 }
 
+.no-starred-idea-yet2 {
+	display: none;
+}
+
+.hidden {
+	display: none;
+}
+
 /*MEDIA QUERIES*/
 
-@media screen and (max-width: 740px) {
+@media screen and (max-width: 970px) {
+
+	output {
+		grid-template-columns: 1fr 1fr;
+		grid-column-gap: 0px;
+	}
+
+@media screen and (max-width: 700px) {
 
 	output {
 	  display: flex;
 	  flex-direction: column;
+	  align-items: center;
 	}
 
 	.idea-box {
@@ -296,7 +319,11 @@ fieldset {
 		height: 200px;
 		justify-self: center;
 		margin-bottom: 10px;
-		width: 100%;
+		width: 80%;
+	}
+
+	.no-idea-yet-text {
+		font-size: 50px;
 	}
 }
 
@@ -338,17 +365,9 @@ fieldset {
     display: none;
   }
 
-/*  .Navbar__Items--right {
-    margin-left: 0;
-  }*/
-
   .Navbar__ToggleShow {
     display: flex;
   }
-
-/*  .header-form, .header-section, legend {
-    border-top: none;
-  }*/
 
   ul {
     margin-left: 8px;
@@ -367,9 +386,13 @@ fieldset {
 	  width: 100%;
   }
 
-/*  .main-form {
-    display: flex;
-  }	  */
+  .idea-box {
+  	width: 85%;
+  }
+
+  .no-idea-yet-text {
+  	font-size: 40px;
+  }
 
   main.change {
    	opacity: 0.2;
