@@ -18,7 +18,7 @@ var tenIdeasBtn = document.getElementById('ten-ideas-button');
 
 window.addEventListener('load', refillArray);
 window.addEventListener('load', repopulateIdeaCards);
-starredIdeasBtn.addEventListener('click', handleStarButton)
+starredIdeasBtn.addEventListener('click', handleStarButton);
 saveBtn.addEventListener('click', createIdea);
 titleInput.addEventListener('keyup', handleSaveBtn);
 bodyInput.addEventListener('keyup', handleSaveBtn);
@@ -26,6 +26,8 @@ searchInput.addEventListener('keyup', handleSearch);
 outputField.addEventListener('keydown', handleCardEdit);
 outputField.addEventListener('focusout', focusOutEvent);
 outputField.addEventListener('click', handleCardButtons);
+outputField.addEventListener('focusin', handleHover);
+outputField.addEventListener('focusout', handleHoverOut);
 navToggle.addEventListener('click', classToggle);
 swillListItem.addEventListener('click', handleQualityButtons);
 plausibleListItem.addEventListener('click', handleQualityButtons);
@@ -45,14 +47,26 @@ function handleQualityButtons(e) {
 	searchByQuality(e, 2, 'genius-li');
 }
 
+function handleHover(e) {
+  cardButtonHover(e, 'upvote-button', 'upvote-active.svg');
+  cardButtonHover(e, 'downvote-button', 'downvote-active.svg');
+  cardButtonHover(e, 'delete-button', 'delete-active.svg');
+}
+
+function handleHoverOut(e) {
+  cardButtonHoverOut(e, 'upvote-button', 'upvote.svg');
+  cardButtonHoverOut(e, 'downvote-button', 'downvote.svg');
+  cardButtonHoverOut(e, 'delete-button', 'delete.svg');
+}
+
 function refillArray() {
-	if (JSON.parse(localStorage.getItem('ideaArray')) === null){
+	if (JSON.parse(localStorage.getItem('ideaArray')) === null) {
 		return;
 	} else {
 	var newArray = JSON.parse(localStorage.getItem('ideaArray')).map(function(array) {
 		return new Idea(array.title, array.body, array.data, array.star, array.quality);
 	});
-	ideaArray = newArray;}
+	ideaArray = newArray};
 }
 
 function createIdea() {
@@ -82,7 +96,7 @@ function displayIdeaCard({title, body, data, star, quality}) {
 				<p class= "quality-text">Quality:&nbsp;&nbsp;${qualityRating[quality]}</p>
 				<input type="image" class="downvote-button" src="idea-box-icons/downvote.svg">
 			</footer>
-		</section>`)
+		</section>`);
 }
 
 function repopulateIdeaCards() {
@@ -103,12 +117,12 @@ function handleCardEdit(e) {
 }
 
 function focusOutEvent(e) {
-	if (e.target.className === 'idea-article-body' || e.target.className === 'idea-article-title'){
-	 	var title = e.target.closest('.idea-article').querySelector('.idea-article-title').innerText;
-		var body = e.target.closest('.idea-article').querySelector('.idea-article-body').innerText;
-		var targetIdea = getIdeaFromArray(e);
-	  targetIdea.updateIdea(title, body);
-	  targetIdea.storeIdea(ideaArray);
+	if (e.target.className === 'idea-article-body' || e.target.className === 'idea-article-title') {
+ 	var title = e.target.closest('.idea-article').querySelector('#idea-title').innerText;
+	var body = e.target.closest('.idea-article').querySelector('#idea-body').innerText;
+	var targetIdea = getIdeaFromArray(e);
+  targetIdea.updateIdea(title, body);
+  targetIdea.storeIdea(ideaArray);
 	}
 }
 
@@ -125,7 +139,7 @@ function deleteCard(e) {
 }
 
 function toggleStar(e) {
-	if (e.target.classList.contains('star-button')){
+	if (e.target.classList.contains('star-button')) {
 	var targetIdea = getIdeaFromArray(e);
 	targetIdea.updateStar(); 
 	var starPath = targetIdea.star ? 'idea-box-icons/star-active.svg' : 'idea-box-icons/star.svg'
@@ -143,15 +157,27 @@ function toggleVote(e, vote, location) {
 	}
 }
 
+function cardButtonHover(e, location, activeButton) {
+  if (e.target.classList.contains(location)) {
+    e.target.setAttribute('src', `idea-box-icons/${activeButton}`);
+  }
+}
+
+function cardButtonHoverOut(e, location, normalButton) {
+  if (e.target.classList.contains(location)) {
+    e.target.setAttribute('src', `idea-box-icons/${normalButton}`)
+  }
+}
+
 function searchByQuality(e, qualityIndex, location) {
-	if (e.target.classList.contains(location)){	
+	if (e.target.classList.contains(location)) {	
 		var qualityFilteredIdeas = ideaArray.filter(function(idea) {
 			return (idea.quality === qualityIndex);
-		})
+		});
 		outputField.innerHTML = '';
-		qualityFilteredIdeas.forEach(function(idea){
+		qualityFilteredIdeas.forEach(function(idea) {
 			displayIdeaCard(idea);
-		})
+		});
 	}
 }
 
@@ -163,7 +189,7 @@ function changeQualityText(targetIdea, qualityText) {
 function findIdea(id) {
 	return ideaArray.find(function(idea) {
 		return idea.data == id;
-	})
+	});
 }
 
 function getIdeaFromArray(e) {
@@ -188,17 +214,17 @@ function searchAllFilter(searchText) {
     });
     filteredIdeas.forEach(function(idea) {
       displayIdeaCard(idea);
-    })
+    });
   }
 }
 
 function searchStarFilter(searchText) {
   var filteredIdeas = ideaArray.filter(function(idea) {
-    return (idea.title.toLowerCase().includes(searchText) && idea.star === true || idea.body.toLowerCase().includes(searchText) && idea.star === true)
+    return (idea.title.toLowerCase().includes(searchText) && idea.star === true || idea.body.toLowerCase().includes(searchText) && idea.star === true);
   });
   filteredIdeas.forEach(function(idea) {
     displayIdeaCard(idea);
-  })
+  });
 }
 
 function searchQualityFilter(searchText, qualityIndex) {
@@ -216,7 +242,7 @@ function handleStarButton() {
 		showStarredIdeas();
 	} else {
 		repopulateIdeaCards();
-		starredIdeasBtn.innerHTML = 'Show Starred Ideas'
+		starredIdeasBtn.innerHTML = 'Show Starred Ideas';
 	}
 }
 
@@ -226,14 +252,14 @@ function showStarredIdeas() {
     });
     filteredStarIdeas.forEach(function(idea) {
       displayIdeaCard(idea);
-    })
+    });
     starredIdeasBtn.innerHTML = 'View All Ideas';
 }
 
 function classToggle(e) {
-  const navs = document.querySelectorAll('.Navbar__Items')
+  const navs = document.querySelectorAll('.Navbar__Items');
   navs.forEach(function(nav) {
-    nav.classList.toggle('Navbar__ToggleShow')
+    nav.classList.toggle('Navbar__ToggleShow');
   });
   outputField.classList.toggle('change');
   mainOpacity.classList.toggle('change');
