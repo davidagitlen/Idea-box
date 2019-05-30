@@ -245,7 +245,7 @@ function handleStarButton() {
 	outputField.innerHTML = `<p class="no-starred-idea-yet no-starred-idea-yet2">Please star some ideas!</p>`;
 	if (starredIdeasBtn.innerHTML === 'Show Starred Ideas') {
 		showStarredIdeas();
-    starPlaceholder();
+    // starPlaceholder();
 	} else {
 		repopulateIdeaCards();
 		starredIdeasBtn.innerHTML = 'Show Starred Ideas';
